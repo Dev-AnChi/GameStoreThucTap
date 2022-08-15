@@ -1,0 +1,93 @@
+<!-- Section: Design Block -->
+<section class="text-center" style="padding-top: 20px;">
+    <div class="card mx-4 mx-md-5 shadow-5-strong">
+      <div class="card-body py-5 px-md-5">
+
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-8">
+            <h2 class="fw-bold mb-5">Đăng kí tài khoản</h2>
+            <form>  
+              <!-- 2 column grid layout with text inputs for the first and last names -->
+              <div class="form-floating mb-4">
+                <input type="text" id="name" class="form-control" placeholder="Họ và tên"/>
+                <label for="name">Họ và tên</label>
+              </div>
+
+              <!-- Username input -->
+              <div class="form-floating mb-4">
+                <input type="text" id="username" class="form-control" placeholder="Tài khoản" />
+                <label for="username">Tài khoản</label>
+              </div>
+  
+              <!-- Password input -->
+              <div class="form-floating mb-4">
+                <input type="password" id="password" class="form-control" placeholder="Mật khẩu" />
+                <label for="password">Mật khẩu</label>
+              </div>
+  
+              <div class="form-floating mb-2 d-flex">
+                <div class="form-check form-check-inline" >
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                  <label class="form-check-label" for="inlineRadio1">Nam</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                  <label class="form-check-label" for="inlineRadio2">Nữ</label>
+                </div>
+              </div>
+
+              <div class="form-outline mb-4 ">
+                <label class="form-label pull-left" for="customFile">Ảnh đại diện</label>
+                <input type="file" class="form-control" id="customFile" style="border: solid 1px grey;"/>
+              </div>
+              
+              <!-- SDT input -->
+              <div class="form-floating mb-4 form-floating">
+                <input type="phone" id="sdt" class="form-control" placeholder="Số điện thoại" />
+                <label for="sdt">Số điện thoại</label>
+              </div>
+              
+              <!-- Date input -->
+              <div class="form-floating mb-4">
+                <input type="date" id="date" class="form-control" placeholder="Ngày sinh" />
+                <label class="form-label pull-left" for="date">Ngày sinh</label>
+              </div>
+
+              <!-- Email input -->
+              <div class="form-floating mb-4">
+                <input type="email" id="email" class="form-control" placeholder="Địa chỉ Email" />
+                <label for="email">Địa chỉ Email</label>
+              </div>
+
+               <!-- Email input -->
+               <div class="form-floating mb-4">
+                <input type="address" id="address" class="form-control" placeholder="Địa chỉ" />
+                <label for="address">Địa chỉ</label>
+              </div>
+              
+              <select class="form-select mb-4" id="ncn" aria-label="Default select example">
+                <option selected disabled>Nhóm chức năng</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+
+              <!-- Checkbox -->
+              <div class="form-check d-flex justify-content-center mb-4 pull-left">
+                <input class="form-check-input me-2" type="checkbox" value="" id="rules"/>
+                <label class="form-check-label" for="rules">
+                  Tôi đã đọc kĩ điều khoản sử dụng
+                </label>
+              </div>
+
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary btn-block mb-4">
+                Đăng kí
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Section: Design Block -->

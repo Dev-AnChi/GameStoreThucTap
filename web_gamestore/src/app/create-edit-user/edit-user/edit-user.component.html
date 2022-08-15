@@ -1,0 +1,83 @@
+<section class="card mx-4 mx-md-5 shadow-5-strong" style="margin-top: 20px;">
+    <div  class="container card-body py-5 px-md-5" style="width: 95%;">
+      <div class="row">
+        <h2 class="fw-bold mb-5 text-center">Chỉnh sửa thông tin người dùng</h2>
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                    class="rounded-circle img-fluid" style="width: 150px;">
+                <input type="file" class="text-center">
+                <input type="text" class="my-3 text-center" value="Moonlight" />
+                <p class="text-muted mb-1">Được tạo ngày : 06/07/2020</p>
+                <p class="text-muted mb-4">Cập nhật cuối : 09/07/2020</p>
+                <div class="d-flex justify-content-center mb-2">
+                    <a [routerLink]="['/user_profile']" routerLinkActive="router-link-active"><button type="button" class="btn btn-primary" (click)="saveUserClick()">Lưu thay đổi</button></a>
+                    <button type="button" class="btn btn-outline-primary ms-1">Quay lại</button>
+                </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Họ và tên</p>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" class="text-muted mb-0" value="Phạm Ân Chí" />
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Ngày sinh</p>
+                </div>
+                <div class="col-sm-9">
+                  <input type="date" class="text-muted mb-0" value="2001-07-06" />
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Giới tính</p>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" class="text-muted mb-0" value="Nam" />
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <input type="email" class="text-muted mb-0" value="example@example.com" />
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Số điện thoại</p>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" class="text-muted mb-0" value="0972034678"  />
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Địa chỉ</p>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" class="text-muted mb-0" value="Nha Trang, Khánh Hòa" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
