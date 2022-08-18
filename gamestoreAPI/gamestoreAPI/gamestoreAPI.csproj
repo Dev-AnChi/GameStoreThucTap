@@ -165,6 +165,8 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HinhAnhController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NguoiDungController.cs" />
+    <Compile Include="Controllers\NhomChucNangController.cs" />
     <Compile Include="Controllers\TheLoaiController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -173,6 +175,8 @@
     <Compile Include="Models\ChiTietGameModel.cs" />
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\HinhAnhModel.cs" />
+    <Compile Include="Models\NguoiDungModel.cs" />
+    <Compile Include="Models\NhomChucNangModel.cs" />
     <Compile Include="Models\TheLoaiModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

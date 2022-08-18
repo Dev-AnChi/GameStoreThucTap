@@ -109,4 +109,34 @@ export class SharedService {
     return this.http.get<any[]>(this.APIUrl+'/ChiTietGame/'+val);
   }
   
+
+  //Người dùng
+  checkLogin:boolean=false;
+  username:any;
+  password:any; 
+  getNguoiDung():Observable<any[]>{
+    return this.http.get<any>(this.APIUrl+'/NguoiDung');
+  }
+  addNguoiDung(val:any){
+    return this.http.post(this.APIUrl+'/NguoiDung',val);
+  }
+  deleteNguoiDung(val:any){
+    return this.http.delete(this.APIUrl+'/NguoiDung/'+val);
+  }
+  editNguoiDung(val:any){
+    return this.http.put(this.APIUrl + '/NguoiDung',val);
+  }
+  detailNguoiDung(username:any, password:any){
+    return this.http.get(this.APIUrl + '/NguoiDung/Login/' + username + '/' + password);
+  }
+  //Lấy tên thể loại theo ID game
+  getIDNameNhomChucNang(val:any){
+    return this.http.get(this.APIUrl+'/NguoiDung/GetIDNameNhomChucNang/'+val);
+  }
+  getAllNameNhomChucNang():Observable<any[]>{
+    return this.http.get<any[]>(this.APIUrl+'/NguoiDung/GetAllNameNhomChucNang/');
+  }
+  UploadImagesNguoiDung(val:any){
+    return this.http.post(this.APIUrl+'/NguoiDung/SaveFile', val);
+  }
 }

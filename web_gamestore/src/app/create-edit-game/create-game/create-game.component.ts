@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { SharedService } from 'src/app/shared.service';
 @Component({
   selector: 'app-create-game',
   templateUrl: './create-game.component.html',
@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateGameComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service:SharedService) { }
 
   ngOnInit(): void {
   }
+
 
 }

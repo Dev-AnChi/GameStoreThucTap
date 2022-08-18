@@ -5,12 +5,12 @@
         <div class="col-lg-4">
           <div class="card mb-4">
             <div class="card-body text-center">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                <img [src]=imageUrl+AnhDaiDien alt="avatar"
                     class="rounded-circle img-fluid" style="width: 150px;">
                 <input type="file" class="text-center">
-                <input type="text" class="my-3 text-center" value="Moonlight" />
-                <p class="text-muted mb-1">Được tạo ngày : 06/07/2020</p>
-                <p class="text-muted mb-4">Cập nhật cuối : 09/07/2020</p>
+                <input type="text" class="my-3 text-center" [(ngModel)]=NickName [value]=NickName />
+                <p class="text-muted mb-1" [(ngModel)]=NgayTao>Được tạo ngày : {{NgayTao}}</p>
+                <p class="text-muted mb-4" [(ngModel)]=NgayCapNhat>Cập nhật cuối : {{NgayCapNhat}}</p>
                 <div class="d-flex justify-content-center mb-2">
                     <a [routerLink]="['/user_profile']" routerLinkActive="router-link-active"><button type="button" class="btn btn-primary" (click)="saveUserClick()">Lưu thay đổi</button></a>
                     <button type="button" class="btn btn-outline-primary ms-1">Quay lại</button>
@@ -27,7 +27,7 @@
                   <p class="mb-0">Họ và tên</p>
                 </div>
                 <div class="col-sm-9">
-                  <input type="text" class="text-muted mb-0" value="Phạm Ân Chí" />
+                  <input type="text" class="text-muted mb-0" [value]=TenNguoiDung [(ngModel)]=TenNguoiDung/>
                 </div>
               </div>
               <hr>
@@ -36,7 +36,7 @@
                   <p class="mb-0">Ngày sinh</p>
                 </div>
                 <div class="col-sm-9">
-                  <input type="date" class="text-muted mb-0" value="2001-07-06" />
+                  <input type="date" class="text-muted mb-0" pattern="\d{2}/\d{2}/\d{4}" [value]=NgaySinh [(ngModel)]=NgaySinh/>
                 </div>
               </div>
               <hr>
@@ -45,7 +45,8 @@
                   <p class="mb-0">Giới tính</p>
                 </div>
                 <div class="col-sm-9">
-                  <input type="text" class="text-muted mb-0" value="Nam" />
+                  <input type="text" class="text-muted mb-0" *ngIf=GioiTinh value="Nam" />
+                  <input type="text" class="text-muted mb-0" *ngIf=!GioiTinh value="Nữ" />
                 </div>
               </div>
               <hr>
@@ -54,7 +55,7 @@
                   <p class="mb-0">Email</p>
                 </div>
                 <div class="col-sm-9">
-                  <input type="email" class="text-muted mb-0" value="example@example.com" />
+                  <input type="email" class="text-muted mb-0" [value]=Email [(ngModel)]=Email/>
                 </div>
               </div>
               <hr>
@@ -63,7 +64,7 @@
                   <p class="mb-0">Số điện thoại</p>
                 </div>
                 <div class="col-sm-9">
-                  <input type="text" class="text-muted mb-0" value="0972034678"  />
+                  <input type="text" class="text-muted mb-0" [value]=SDT  [(ngModel)]=SDT/>
                 </div>
               </div>
               <hr>
@@ -72,7 +73,21 @@
                   <p class="mb-0">Địa chỉ</p>
                 </div>
                 <div class="col-sm-9">
-                  <input type="text" class="text-muted mb-0" value="Nha Trang, Khánh Hòa" />
+                  <input type="text" class="text-muted mb-0" [value]=DiaChi [(ngModel)]=DiaChi/>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Nhóm chức năng</p>
+                </div>
+                <div class="col-sm-9">
+                  <select class="form-select mb-4" id="ncn" aria-label="Default select example">
+                    <option selected disabled>{{TenNhomChucNang}}</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
                 </div>
               </div>
             </div>

@@ -188,8 +188,8 @@ namespace gamestoreAPI.Controllers
             }
         }
 
-
-        [Route("api/HinhAnh/GetIDNameTheLoai")]
+/*
+        [Route("api/Game/GetIDNameTheLoai")]
         [HttpGet]
         public HttpResponseMessage GetIDNameTheLoai(int id)
         {
@@ -206,5 +206,6 @@ namespace gamestoreAPI.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, table);
         }
+*/
     }
 }

@@ -8,12 +8,12 @@
             <h3 class="mb-5">Đăng nhập</h3>
 
             <div class="form-floating mb-4">
-              <input type="email" id="typeEmailX-2" class="form-control form-control-lg" placeholder="Username or Email" />
+              <input type="email" id="typeEmailX-2" class="form-control form-control-lg" placeholder="Username or Email" [(ngModel)]=username/>
               <label for="typeEmailX-2">Username or Email</label>
             </div>
 
             <div class="form-floating mb-4">
-              <input type="password" id="typePasswordX-2" class="form-control form-control-lg" placeholder="Password" />
+              <input type="password" id="typePasswordX-2" class="form-control form-control-lg" placeholder="Password" [(ngModel)]=password/>
               <label for="typePasswordX-2">Password</label>
             </div>
   
@@ -24,9 +24,11 @@
               <label class="form-check-label" for="form1Example3"> Ghi nhớ tài khoản đăng nhập </label>
             </div>
 
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Đăng nhập</button>
-
-            <hr class="my-4">
+            <a [routerLink]="['/user_profile']" routerLinkActive="router-link-active">
+              <button class="btn btn-primary btn-lg btn-block" type="submit" (click)="clickLogin()">Đăng nhập</button>
+            </a>
+            
+              <hr class="my-4">
             
             <a [routerLink]="['/register']" routerLinkActive="router-link-active">
             <button class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;"

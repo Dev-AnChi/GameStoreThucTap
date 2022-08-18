@@ -1,17 +1,17 @@
-<section class="card mx-4 mx-md-5 shadow-5-strong" style="margin-top: 20px;">
+<section class="card mx-4 mx-md-5 shadow-5-strong" style="margin-top: 20px;" *ngIf="checkLogin && User[0].ID_NguoiDung !='error' ">
     <div  class="container card-body py-5 px-md-5" style="width: 95%;">
       <div class="row">
         <div class="col-lg-4">
           <div class="card mb-4">
             <div class="card-body text-center">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+              <img [src]=imageUrl+User[0].AnhDaiDien alt="avatar"
                 class="rounded-circle img-fluid" style="width: 150px;">
-              <h5 class="my-3">Moonlight</h5>
-              <p class="text-muted mb-1">Được tạo ngày : 06/07/2020</p>
-              <p class="text-muted mb-4">Cập nhật cuối : 09/07/2020</p>
+              <h5 class="my-3">{{User[0].NickName}}</h5>
+              <p class="text-muted mb-1">Được tạo ngày : {{User[0].NgayTao}}</p>
+              <p class="text-muted mb-4">Cập nhật cuối : {{User[0].NgayCapNhat}}</p>
               <div class="d-flex justify-content-center mb-2">
                 <a [routerLink]="['/edit-user']" routerLinkActive="router-link-active"><button type="button" class="btn btn-primary">Chỉnh sửa thông tin</button></a>
-                <button type="button" class="btn btn-outline-primary ms-1">Nhóm</button>
+                <button type="button" class="btn btn-outline-primary ms-1">{{TenNhomChucNang[0].TenNhomChucNang}}</button>
               </div>
             </div>
           </div>
@@ -25,7 +25,7 @@
                   <p class="mb-0">Họ và tên</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">Phạm Ân Chí</p>
+                  <p class="text-muted mb-0">{{User[0].TenNguoiDung}}</p>
                 </div>
               </div>
               <hr>
@@ -34,7 +34,7 @@
                   <p class="mb-0">Ngày sinh</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">06/07/2001</p>
+                  <p class="text-muted mb-0">{{User[0].NgaySinh}}</p>
                 </div>
               </div>
               <hr>
@@ -43,7 +43,8 @@
                   <p class="mb-0">Giới tính</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">Nam</p>
+                  <p class="text-muted mb-0" *ngIf=User[0].GioiTinh>Nam</p>
+                  <p class="text-muted mb-0" *ngIf=!User[0].GioiTinh>Nữ</p>
                 </div>
               </div>
               <hr>
@@ -52,7 +53,7 @@
                   <p class="mb-0">Email</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">example@example.com</p>
+                  <p class="text-muted mb-0">{{User[0].Email}}</p>
                 </div>
               </div>
               <hr>
@@ -61,7 +62,7 @@
                   <p class="mb-0">Số điện thoại</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">0972034678</p>
+                  <p class="text-muted mb-0">{{User[0].SDT}}</p>
                 </div>
               </div>
               <hr>
@@ -70,7 +71,7 @@
                   <p class="mb-0">Địa chỉ</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">Nha Trang, Khánh Hòa</p>
+                  <p class="text-muted mb-0">{{User[0].DiaChi}}</p>
                 </div>
               </div>
             </div>
@@ -79,3 +80,13 @@
       </div>
     </div>
   </section>
+
+<section class="card mx-4 mx-md-5 shadow-5-strong" style="margin-top: 20px;" *ngIf="!checkLogin || User[0].ID_NguoiDung=='error' ">
+  <div  class="container card-body py-5 px-md-5" style="width: 95%;">
+    <div class="row">
+      <div class="col-lg" style="color: red;">
+        Yêu cầu đăng nhập để thực hiện tính năng này !!! <a [routerLink]="['/login']" routerLinkActive="router-link-active"  id="login"><span style="color: blue;"> Đăng nhập ngay</span></a>
+      </div>
+    </div>
+  </div>
+</section>
