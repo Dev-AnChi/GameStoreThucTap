@@ -25,7 +25,11 @@ export class UserProfileComponent implements OnInit {
   refreshUser(){
     this.service.detailNguoiDung(this.service.username,this.service.password).subscribe(data=>{
       this.User=data;
-      this.service.getIDNameNhomChucNang(this.User[0].ID_NhomChucNang).subscribe(data1=>{
+      if(this.User[0].ID_NguoiDung == 'error'){
+        this.service.checkLogin = false;
+        this.checkLogin = this.service.checkLogin;
+      }
+      this.service.getNameIDNhomChucNang(this.User[0].ID_NhomChucNang).subscribe(data1=>{
         this.TenNhomChucNang=data1;
       }
       )

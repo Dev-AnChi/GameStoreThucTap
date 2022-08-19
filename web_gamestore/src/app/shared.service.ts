@@ -112,8 +112,8 @@ export class SharedService {
 
   //Người dùng
   checkLogin:boolean=false;
-  username:any;
-  password:any; 
+  username:string="error";
+  password:string="error"; 
   getNguoiDung():Observable<any[]>{
     return this.http.get<any>(this.APIUrl+'/NguoiDung');
   }
@@ -129,7 +129,9 @@ export class SharedService {
   detailNguoiDung(username:any, password:any){
     return this.http.get(this.APIUrl + '/NguoiDung/Login/' + username + '/' + password);
   }
-  //Lấy tên thể loại theo ID game
+  getNameIDNhomChucNang(val:any){
+    return this.http.get(this.APIUrl+'/NguoiDung/GetNameIDNhomChucNang/'+val);
+  }
   getIDNameNhomChucNang(val:any){
     return this.http.get(this.APIUrl+'/NguoiDung/GetIDNameNhomChucNang/'+val);
   }

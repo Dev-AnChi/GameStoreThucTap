@@ -13,9 +13,7 @@ export class AppComponent {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
-  constructor(private observer: BreakpointObserver, private service:SharedService) {}
-
-  checkLogin:any;
+  constructor(private observer: BreakpointObserver, public service:SharedService) {}
 
   ngAfterViewInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
@@ -25,8 +23,13 @@ export class AppComponent {
         this.sidenav.open();
       }
     });
-
-    this.checkLogin = this.service.checkLogin;
-    console.log("check login : ");
   }
+
+  clickLogout(){
+    alert("Bạn có chắc chắn muốn đăng xuất không ? ");
+    this.service.checkLogin = false;
+    this.service.username ="error";
+    this.service.password="error";
+  }
+
 }

@@ -7,7 +7,7 @@
             <div class="card-body text-center">
                 <img [src]=imageUrl+AnhDaiDien alt="avatar"
                     class="rounded-circle img-fluid" style="width: 150px;">
-                <input type="file" class="text-center">
+                <input type="file" class="text-center"  (change)="uploadPhoto($event)">
                 <input type="text" class="my-3 text-center" [(ngModel)]=NickName [value]=NickName />
                 <p class="text-muted mb-1" [(ngModel)]=NgayTao>Được tạo ngày : {{NgayTao}}</p>
                 <p class="text-muted mb-4" [(ngModel)]=NgayCapNhat>Cập nhật cuối : {{NgayCapNhat}}</p>
@@ -82,11 +82,9 @@
                   <p class="mb-0">Nhóm chức năng</p>
                 </div>
                 <div class="col-sm-9">
-                  <select class="form-select mb-4" id="ncn" aria-label="Default select example">
-                    <option selected disabled>{{TenNhomChucNang}}</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                  <select class="form-select mb-4" id="ncn" [(ngModel)]="TenNhomChucNang">
+                    <option disabled style="background-color: gray; color: white;">{{TenNhomChucNang}}</option>
+                    <option *ngFor="let item of listNhomChucNang">{{item.TenNhomChucNang}}</option>
                   </select>
                 </div>
               </div>

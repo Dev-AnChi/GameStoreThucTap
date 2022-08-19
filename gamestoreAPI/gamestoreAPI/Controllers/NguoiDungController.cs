@@ -110,8 +110,8 @@ namespace gamestoreAPI.Controllers
                 cmd.Parameters.Add(new SqlParameter("@DiaChi", nd.DiaChi));
                 cmd.Parameters.Add(new SqlParameter("@SDT", nd.SDT));
                 cmd.Parameters.Add(new SqlParameter("@AnhDaiDien", nd.AnhDaiDien));
-                cmd.Parameters.Add(new SqlParameter("@UserName_Tao", nd.UserName_Tao));
-                cmd.Parameters.Add(new SqlParameter("@NgayTao", nd.NgayTao));
+                //cmd.Parameters.Add(new SqlParameter("@UserName_Tao", nd.UserName_Tao));
+                //cmd.Parameters.Add(new SqlParameter("@NgayTao", nd.NgayTao));
                 cmd.Parameters.Add(new SqlParameter("@UserName_CapNhat", nd.UserName_CapNhat));
                 cmd.Parameters.Add(new SqlParameter("@NgayCapNhat", nd.NgayCapNhat));
                 cmd.Parameters.Add(new SqlParameter("@ID_NhomChucNang", nd.ID_NhomChucNang));
@@ -201,23 +201,39 @@ namespace gamestoreAPI.Controllers
             }
         }
 
-        [Route("api/NguoiDung/GetIDNameNhomChucNang/{id}")]
+        //get name bằng id nhóm chức năng
+        [Route("api/NguoiDung/GetNameIDNhomChucNang/{id}")]
         [HttpGet]
-        public HttpResponseMessage GetIDNameNhomChucNang(string id)
+        public string GetNameIDNhomChucNang(string id)
         {
-            string query = @"select TenNhomChucNang from dbo.NhomChucNang where ID_NhomChucNang='" + id+ @"'";
-
-            DataTable table = new DataTable();
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["dataGameStore"].ConnectionString))
-            using (var cmd = new SqlCommand(query, con))
-            using (var da = new SqlDataAdapter(cmd))
-            {
-                cmd.CommandType = CommandType.Text;
-                da.Fill(table);
-            }
-
-            return Request.CreateResponse(HttpStatusCode.OK, table);
+            string idNCN = "";
+            var con = new SqlConnection(ConfigurationManager.ConnectionStrings["dataGameStore"].ConnectionString);
+            var cmd = new SqlCommand("getNameIDNhomChucNang", con);
+            cmd.Parameters.Add(new SqlParameter("@ID_NhomChucNang", id));
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            if (cmd.ExecuteScalar() != null)
+                idNCN = cmd.ExecuteScalar().ToString();
+            con.Close();
+            return idNCN;
         }
+        //get id bằng name nhóm chức năng
+        [Route("api/NguoiDung/GetIDNameNhomChucNang/{name}")]
+        [HttpGet]
+        public string GetIDNameNhomChucNang(string name)
+        {
+            string nameNCN = "";
+            var con = new SqlConnection(ConfigurationManager.ConnectionStrings["dataGameStore"].ConnectionString);
+            var cmd = new SqlCommand("getIDNameNhomChucNang", con);
+            cmd.Parameters.Add(new SqlParameter("@TenNhomChucNang", name));
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            if (cmd.ExecuteScalar() != null)
+                nameNCN = cmd.ExecuteScalar().ToString();
+            con.Close();
+            return nameNCN;
+        }
+
         [Route("api/NguoiDung/GetAllNameNhomChucNang")]
         public HttpResponseMessage GetAllNameNhomChucNang()
         {

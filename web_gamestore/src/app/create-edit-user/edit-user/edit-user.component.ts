@@ -13,6 +13,7 @@ export class EditUserComponent implements OnInit {
   checkLogin:any;
   TenNhomChucNang:any;
 
+  ID_NguoiDung:string="";
   NickName:string="";
   UserName_ND:string="";
   Password_ND:string="";
@@ -26,8 +27,8 @@ export class EditUserComponent implements OnInit {
   UserName_Tao:string="";
   NgayTao:string="";
   UserName_CapNhat:string="";
-  NgayCapNhat="";
-  ID_NhomChucNang:string="";
+  NgayCapNhat:string="";
+  ID_NhomChucNang:any;
   listNhomChucNang:any=[];
 
   ngOnInit(): void {
@@ -41,31 +42,32 @@ export class EditUserComponent implements OnInit {
   refreshUser(){
     this.service.detailNguoiDung(this.service.username,this.service.password).subscribe(data=>{
       this.User=data;
-      this.service.getIDNameNhomChucNang(this.User[0].ID_NhomChucNang).subscribe(data1=>{
+      this.service.getNameIDNhomChucNang(this.User[0].ID_NhomChucNang).subscribe(data1=>{
         this.TenNhomChucNang=data1;
       }
       )
-      this.loadListNhomNguoiDung();
+      this.loadListNhomChucNang();
     })
   }
 
-  loadListNhomNguoiDung(){
+  loadListNhomChucNang(){
     this.service.getAllNameNhomChucNang().subscribe((data:any)=>{
       this.listNhomChucNang=data;
 
+      this.ID_NguoiDung = this.User[0].ID_NguoiDung;
       this.NickName=this.User[0].NickName;
       this.UserName_ND=this.User[0].UserName_ND;
       this.Password_ND=this.User[0].Password_ND;
       this.TenNguoiDung=this.User[0].TenNguoiDung;
-      this.NgaySinh=this.User[0].NgaySinh;
+      this.NgaySinh=this.User[0].NgaySinh.substr(0,10);
       this.GioiTinh=this.User[0].GioiTinh;
       this.Email=this.User[0].Email;
       this.SDT=this.User[0].SDT;
       this.DiaChi=this.User[0].DiaChi;
       this.UserName_CapNhat=this.User[0].UserName_CapNhat;
       this.NgayCapNhat=this.User[0].NgayCapNhat;
-      this.UserName_Tao=this.User[0].UserName_Tao;
-      this.NgayTao=this.User[0].NgayTao;
+      // this.UserName_Tao=this.User[0].UserName_Tao;
+      // this.NgayTao=this.User[0].NgayTao;
       this.ID_NhomChucNang=this.User[0].ID_NhomChucNang;
 
       this.AnhDaiDien = this.User[0].AnhDaiDien;
@@ -74,11 +76,27 @@ export class EditUserComponent implements OnInit {
   }
 
   saveUserClick(){
-    var val =  {NickName:this.NickName,UserName_ND:this.UserName_ND,Password_ND:this.Password_ND,
-                TenNguoiDung:this.TenNguoiDung,GioiTinh:this.GioiTinh,NgaySinh:this.NgaySinh,
-                Email:this.Email, DiaChi:this.DiaChi, SDT:this.SDT,AnhDaiDien:this.AnhDaiDien, 
-                UserName_Tao:this.UserName_Tao,NgayTao:this.NgayTao,UserName_CapNhat:this.UserName_CapNhat,
-                NgayCapNhat:this.NgayCapNhat,ID_NhomChucNang:this.ID_NhomChucNang};
-    alert("Lưu lại những thay đổi ?");
+    this.service.getIDNameNhomChucNang(this.TenNhomChucNang).subscribe((data:any)=>{
+        this.ID_NhomChucNang = data;
+        var val =  {ID_NguoiDung:this.ID_NguoiDung,NickName:this.NickName,UserName_ND:this.UserName_ND,Password_ND:this.Password_ND,
+        TenNguoiDung:this.TenNguoiDung,GioiTinh:this.GioiTinh,NgaySinh:this.NgaySinh,
+        Email:this.Email, DiaChi:this.DiaChi, SDT:this.SDT,AnhDaiDien:this.AnhDaiDien 
+        ,UserName_CapNhat:this.service.username,NgayCapNhat:this.NgayCapNhat,ID_NhomChucNang:this.ID_NhomChucNang};
+        alert("Lưu lại những thay đổi ?");
+        console.log(val);
+        this.service.editNguoiDung(val).subscribe(res=>alert(res.toString()));
+    })   
+  }
+
+  uploadPhoto(event:any){
+    var file = event.target.files[0];
+    const formData:FormData=new FormData();
+
+    formData.append('uploadedFile', file, file.name);
+
+    this.service.UploadImagesNguoiDung(formData).subscribe((data:any)=>{
+      this.AnhDaiDien = data.toString();
+      console.log(this.AnhDaiDien);
+    })
   }
 }
