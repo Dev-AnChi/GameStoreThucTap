@@ -203,5 +203,88 @@ namespace gamestoreAPI.Controllers
             con.Close();
             return ID_Game;
         }
+
+
+        
+        public static float danhgiaTB(int id)
+        {
+            float danhgiatb = 0;
+            var con = new SqlConnection(ConfigurationManager.ConnectionStrings["dataGameStore"].ConnectionString);
+            var cmd = new SqlCommand("countDanhGia", con);
+            cmd.Parameters.Add(new SqlParameter("@ID_Game", id));
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            if (cmd.ExecuteScalar() != null)
+                danhgiatb = float.Parse(cmd.ExecuteScalar().ToString());
+            con.Close();
+            return danhgiatb;
+        }
+
+        public static int luotTai(int id)
+        {
+            int luottai = 0;
+            var con = new SqlConnection(ConfigurationManager.ConnectionStrings["dataGameStore"].ConnectionString);
+            var cmd = new SqlCommand("countGameDaTai", con);
+            cmd.Parameters.Add(new SqlParameter("@ID_Game", id));
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            if (cmd.ExecuteScalar() != null)
+                luottai = int.Parse(cmd.ExecuteScalar().ToString());
+            con.Close();
+            return luottai;
+        }
+
+
+        [Route("api/Game/updateDanhGia/{id}")]
+        [HttpGet]
+        public string updateDanhGia(int id)
+        {
+            SqlCommand cmd;
+            SqlDataAdapter da = new SqlDataAdapter();
+            DataTable dt = new DataTable();
+            SqlConnection con;
+            try
+            {
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["dataGameStore"].ConnectionString);
+                cmd = new SqlCommand("editGameDanhGia", con);
+                cmd.Parameters.Add(new SqlParameter("@ID_Game", id));
+                //cmd.Parameters.Add(new SqlParameter("@LuotTaiXuong", luotTai(id)));
+                cmd.Parameters.Add(new SqlParameter("@DanhGiaTB", danhgiaTB(id)));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                da.Fill(dt);
+
+                return "Thành công !!";
+            }
+            catch (Exception)
+            {
+                return "Không thành công !!";
+            }
+        }
+        [Route("api/Game/updateLuotTai/{id}")]
+        [HttpGet]
+        public string updateLuotTai(int id)
+        {
+            SqlCommand cmd;
+            SqlDataAdapter da = new SqlDataAdapter();
+            DataTable dt = new DataTable();
+            SqlConnection con;
+            try
+            {
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["dataGameStore"].ConnectionString);
+                cmd = new SqlCommand("editGameLuotTai", con);
+                cmd.Parameters.Add(new SqlParameter("@ID_Game", id));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                da.Fill(dt);
+
+                return "Thành công !!";
+            }
+            catch (Exception)
+            {
+                return "Không thành công !!";
+            }
+        }
+
     }
 }

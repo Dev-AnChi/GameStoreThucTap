@@ -123,20 +123,24 @@ namespace gamestoreAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, dt);
 
         }
-/*
-        public HttpResponseMessage Get(List<string> dataIDBinhLuan)
+
+        [Route("api/ChiTietGame/getGamelistIDTheLoai/{id}")]
+        [HttpGet]
+        public HttpResponseMessage getGamelistNameTheLoai(string id)
         {
             SqlCommand cmd;
             SqlDataAdapter da = new SqlDataAdapter();
             DataTable dt = new DataTable();
             SqlConnection con;
 
-            string id;
-            for(int i=0; i<= dataIDBinhLuan.Count; i++)
-            {
-                id = dataIDBinhLuan[0];
-            }            
+            con = new SqlConnection(ConfigurationManager.ConnectionStrings["dataGameStore"].ConnectionString);
+            cmd = new SqlCommand("getGamelistIDTheLoai", con);
+            cmd.Parameters.Add(new SqlParameter("@ID_Loai", id));
+            cmd.CommandType = CommandType.StoredProcedure;
+            da.SelectCommand = cmd;
+            da.Fill(dt);
 
-        }*/
+            return Request.CreateResponse(HttpStatusCode.OK, dt);
+        }
     }
 }

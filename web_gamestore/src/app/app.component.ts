@@ -17,17 +17,17 @@ export class AppComponent {
   constructor(private observer: BreakpointObserver, public service:SharedService, private route:ActivatedRoute,private router:Router) {}
 
   ID_NguoiDung:any;
+  listTheLoai:any;
 
-  // ngOnInit(): void {
-  //   this.getIDNguoiDung();
-  // }
+  ngOnInit(): void {
+    this.getlistTheLoai();
+  }
 
-  // getIDNguoiDung(){
-  //   this.service.checkUserName(this.service.username).subscribe(id=>{
-  //     this.ID_NguoiDung=id;
-  //     console.log(this.ID_NguoiDung);
-  //   })
-  // }
+  getlistTheLoai(){
+    this.service.getTheLoailist().subscribe(data=>{
+      this.listTheLoai = data;
+    })
+  }
 
   ngAfterViewInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((res) => {

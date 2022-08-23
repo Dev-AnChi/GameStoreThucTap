@@ -21,6 +21,7 @@ import { OtherComponent } from './other/other.component';
 const routes: Routes = [
   {path:"", component:GameComponent},
   {path:"game", component:GameComponent},
+  {path:"game/:theloai", component:GameComponent},
   {path:"login", component:LoginComponent},
   {path:"register", component:RegisterComponent},
   {path:"detail_game/:id", component:DetailGameComponent},

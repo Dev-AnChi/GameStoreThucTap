@@ -22,7 +22,7 @@
                             </div>
                         </a>
                         <div class="weight">
-                            <small><span *ngFor="let in of counter(dataItem.DanhGiaTB) ;let i = index"><i class="fa fa-star" ></i></span><span *ngFor="let in of counter(5-dataItem.DanhGiaTB) ;let i = index"><i class="fa fa-star" style="color: gray;"></i> </span> {{dataItem.DanhGiaTB}}/5.0 </small>
+                            <small><span *ngFor="let in of counter(dataItem.DanhGiaTB) ;let i = index"><i class="fa fa-star" ></i></span><span *ngFor="let in of counter(5-dataItem.DanhGiaTB) ;let i = index"><i class="fa fa-star" style="color: gray;"></i> </span> {{dataItem.DanhGiaTB.toFixed(1)}}/5.0 </small>
                         </div>
                     </div>
                 </div>

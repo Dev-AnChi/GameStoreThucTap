@@ -65,7 +65,7 @@
                     <div class="rating pull-right" > 
                       <span *ngFor="let in of counter(dataGame[0].DanhGiaTB) ;let i = index"><i class="fa fa-star" ></i></span>
                       <span *ngFor="let in of counter(5-dataGame[0].DanhGiaTB) ;let i = index"><i class="fa fa-star" style="color: gray;"></i></span><br/>
-                        <span class="rated">Rated {{dataGame[0].DanhGiaTB}}/5</span> 
+                        <span class="rated">Rated {{dataGame[0].DanhGiaTB.toFixed(1)}}/5</span> 
                     </div>
                 </div>
             </div>

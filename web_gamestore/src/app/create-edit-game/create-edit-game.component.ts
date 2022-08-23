@@ -36,6 +36,7 @@ export class CreateEditGameComponent implements OnInit {
   }
   
   counter(i: number) {
+    i = Math.round(i);
     return new Array(i);
   }
 }

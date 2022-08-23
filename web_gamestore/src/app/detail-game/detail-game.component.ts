@@ -42,7 +42,9 @@ export class DetailGameComponent implements OnInit {
     this.refreshUser();
     this.route.params.subscribe(params => {
       this.idGameDetails = params['id'];
-      this.refreshGame();
+      this.service.updateGameDanhGia(this.idGameDetails).subscribe(res=>{
+        this.refreshGame();
+      });
       this.refreshBinhLuan();
     });
   }
@@ -80,7 +82,6 @@ export class DetailGameComponent implements OnInit {
     
     this.service.getNameTheLoaiChiTietGame(this.idGameDetails).subscribe(data=>{
       this.dataTheLoai = data;
-      console.log(data);
     })
 
     this.service.getHinhAnhIDGame(this.idGameDetails).subscribe(data=>{
@@ -121,6 +122,9 @@ export class DetailGameComponent implements OnInit {
       NgayBinhLuan:this.NgayBinhLuan,ID_NguoiBinhLuan:this.ID_NguoiBinhLuan,ID_Game:this.ID_Game}
       this.service.addBinhLuan(val).subscribe(res=>{
         this.refreshBinhLuan();
+        this.service.updateGameDanhGia(this.idGameDetails).subscribe(res=>{
+          this.refreshGame();
+        });
         alert(res.toString());
       })
     })
@@ -169,13 +173,20 @@ export class DetailGameComponent implements OnInit {
             this.isGameDaTai = false;
   
           if(this.isGameDaTai == true){
-            this.service.deleteGameDaTai(check).subscribe(res=>alert(res.toString()));
+            this.service.deleteGameDaTai(check).subscribe(res=>{
+              alert(res.toString())
+            });
             this.isGameDaTai=false;
             alert("Đã gỡ cài đặt thành công !");
           }
           else{
             var val={CapNhat:false,NgayTai:"",ID_NguoiDung:this.User[0].ID_NguoiDung,ID_Game:this.idGameDetails}
-            this.service.addGameDaTai(val).subscribe(res=>alert(res.toString()));
+            this.service.addGameDaTai(val).subscribe(res=>{
+              this.service.updateGameLuotTai(this.idGameDetails).subscribe(res=>{
+                this.refreshGame();
+              });
+              alert(res.toString())
+            });
             this.isGameDaTai = true;
             alert("Đã cài đặt thành công !");
           }
@@ -185,6 +196,7 @@ export class DetailGameComponent implements OnInit {
   }
 
   counter(i: number) {
+    i = Math.round(i);
     return new Array(i);
   }
 

@@ -25,20 +25,13 @@
                 <li class="nav-item">
                     <a class="nav-link active"  [routerLink]="['/game']" routerLinkActive="router-link-active">Trang chủ</a>
                 </li>
+                <span *ngFor="let item of listTheLoai">
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/game',item.ID_Loai]" routerLinkActive="router-link-active">{{item.TenTheLoai}}</a>
+                    </li>
+                </span>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Chiến thuật</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Nhập vai</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Hành động</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Phiêu lưu</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Bảng xếp hạng</a>
+                    <a class="nav-link">Bảng xếp hạng</a>
                 </li>
             </ul>
 

@@ -34,6 +34,13 @@ export class SharedService {
     return this.http.post(this.APIUrl+'/Game/SaveFile', val);
   }
 
+  updateGameDanhGia(val:any){
+   return this.http.get(this.APIUrl + '/Game/updateDanhGia/' + val);
+  }
+  updateGameLuotTai(val:any){
+    return this.http.get(this.APIUrl + '/Game/updateLuotTai/' + val);
+   }
+
   
 //the loai  
   getTheLoailist():Observable<any[]>{
@@ -93,6 +100,10 @@ export class SharedService {
   //Tìm ID game theo logo
   getIDNameGame(val:any){
     return this.http.get(this.APIUrl + '/Game/GetIDNameGame/' + val);
+  }
+  //get game bằng id loại
+  getGamelistIDTheLoai(val:any):Observable<any[]>{
+    return this.http.get<any[]>(this.APIUrl + '/ChiTietGame/getGamelistIDTheLoai/' + val);
   }
   
 
