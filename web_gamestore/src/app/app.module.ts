@@ -22,12 +22,20 @@ import { EditGameComponent } from './create-edit-game/edit-game/edit-game.compon
 import { CreateEditUserComponent } from './create-edit-user/create-edit-user.component';
 import { CreateUserComponent } from './create-edit-user/create-user/create-user.component';
 import { EditUserComponent } from './create-edit-user/edit-user/edit-user.component';
+import { EditImageMHComponent } from './create-edit-game/edit-game/edit-image-mh/edit-image-mh.component';
+import { EditTheloaiComponent } from './create-edit-game/edit-game/edit-theloai/edit-theloai.component';
 
 // add service
 import { SharedService } from './shared.service'; 
 //add phương thức http
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { CreateImageLogoComponent } from './create-edit-game/create-game/create-image-logo/create-image-logo.component';
+import { CreateTheloaiComponent } from './create-edit-game/create-game/create-theloai/create-theloai.component';
+import { GameDownloadComponent } from './game-download/game-download.component';
+import { GameLikeComponent } from './game-like/game-like.component';
+import { OtherComponent } from './other/other.component';
+
 
 @NgModule({
   declarations: [
@@ -43,6 +51,13 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
     CreateEditUserComponent,
     CreateUserComponent,
     EditUserComponent,
+    EditImageMHComponent,
+    EditTheloaiComponent,
+    CreateImageLogoComponent,
+    CreateTheloaiComponent,
+    GameDownloadComponent,
+    GameLikeComponent,
+    OtherComponent,
 
   ],
   imports: [

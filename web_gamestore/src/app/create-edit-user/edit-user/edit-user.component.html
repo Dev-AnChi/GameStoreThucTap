@@ -12,8 +12,10 @@
                 <p class="text-muted mb-1" [(ngModel)]=NgayTao>Được tạo ngày : {{NgayTao}}</p>
                 <p class="text-muted mb-4" [(ngModel)]=NgayCapNhat>Cập nhật cuối : {{NgayCapNhat}}</p>
                 <div class="d-flex justify-content-center mb-2">
-                    <a [routerLink]="['/user_profile']" routerLinkActive="router-link-active"><button type="button" class="btn btn-primary" (click)="saveUserClick()">Lưu thay đổi</button></a>
-                    <button type="button" class="btn btn-outline-primary ms-1">Quay lại</button>
+                    <button type="button" class="btn btn-primary" (click)="saveUserClick()">Lưu thay đổi</button>
+                    <a [routerLink]="['/user_profile/', ID_NguoiDung]" routerLinkActive="router-link-active">
+                      <button type="button" class="btn btn-outline-primary ms-1">Quay lại</button>
+                    </a>
                 </div>
             </div>
           </div>
@@ -82,10 +84,10 @@
                   <p class="mb-0">Nhóm chức năng</p>
                 </div>
                 <div class="col-sm-9">
-                  <select class="form-select mb-4" id="ncn" [(ngModel)]="TenNhomChucNang">
-                    <option disabled style="background-color: gray; color: white;">{{TenNhomChucNang}}</option>
+                  <select class="form-select mb-0" id="ncn" [(ngModel)]="TenNhomChucNang">
+                    <option disabled selected style="background-color: gray; color: white;">{{TenNhomChucNang}}</option>
                     <option *ngFor="let item of listNhomChucNang">{{item.TenNhomChucNang}}</option>
-                  </select>
+                  </select>     
                 </div>
               </div>
             </div>

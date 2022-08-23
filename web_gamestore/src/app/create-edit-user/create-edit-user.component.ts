@@ -31,7 +31,12 @@ export class CreateEditUserComponent implements OnInit {
     return new Array(i);
   }
 
-  deleteClick(){
-    alert("Bạn có chắc chắn muốn xóa không ?");
+  deleteClick(item:any){
+    if(confirm('Bạn có chắc chắn muốn xóa không ?')){
+      this.service.deleteNguoiDung(item.ID_NguoiDung).subscribe(data=>{
+        alert(data.toString());
+        this.refreshUserList();
+      });
+    }
   }
 }

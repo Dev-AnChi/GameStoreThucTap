@@ -8,7 +8,7 @@ import { SharedService } from '../shared.service';
 export class RegisterComponent implements OnInit {
 
   constructor(private service:SharedService) { }
-  TenNhomChucNang:any;
+  TenNhomChucNang:string="";
 
   ID_NguoiDung:string="";
   NickName:string="";
@@ -41,13 +41,20 @@ export class RegisterComponent implements OnInit {
   saveUserClick(){
     this.service.getIDNameNhomChucNang(this.TenNhomChucNang).subscribe((data:any)=>{
         this.ID_NhomChucNang = data;
-        var val =  {ID_NguoiDung:this.ID_NguoiDung,NickName:this.NickName,UserName_ND:this.UserName_ND,Password_ND:this.Password_ND,
-        TenNguoiDung:this.TenNguoiDung,GioiTinh:this.GioiTinh,NgaySinh:this.NgaySinh,Email:this.Email, DiaChi:this.DiaChi, 
-        SDT:this.SDT,AnhDaiDien:this.AnhDaiDien,UserName_Tao:this.service.username,NgayTao:this.NgayTao,
-        UserName_CapNhat:this.service.username,NgayCapNhat:this.NgayCapNhat,ID_NhomChucNang:this.ID_NhomChucNang};
-        alert("Lưu lại những thay đổi ?");
-        console.log(val);
-        this.service.addNguoiDung(val).subscribe(res=>alert(res.toString()));
+        this.service.checkUserName(this.UserName_ND).subscribe(IDusername=>{
+          if(IDusername=='null'){
+            var val =  {ID_NguoiDung:this.ID_NguoiDung,NickName:this.NickName,UserName_ND:this.UserName_ND,Password_ND:this.Password_ND,
+              TenNguoiDung:this.TenNguoiDung,GioiTinh:this.GioiTinh,NgaySinh:this.NgaySinh,Email:this.Email, DiaChi:this.DiaChi, 
+              SDT:this.SDT,AnhDaiDien:this.AnhDaiDien,UserName_Tao:this.service.username,NgayTao:this.NgayTao,
+              UserName_CapNhat:this.service.username,NgayCapNhat:this.NgayCapNhat,ID_NhomChucNang:this.ID_NhomChucNang};
+              alert("Lưu lại những thay đổi ?");
+              console.log(val);
+              this.service.addNguoiDung(val).subscribe(res=>alert(res.toString()));
+          }
+          else{
+            alert(this.UserName_ND + " đã tồn tại, vui lòng chọn tên đăng nhập khác !!!");
+          }
+        })
     })   
   }
 
@@ -62,5 +69,4 @@ export class RegisterComponent implements OnInit {
       console.log(this.AnhDaiDien);
     })
   }
-
 }

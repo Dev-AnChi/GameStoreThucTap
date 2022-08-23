@@ -152,6 +152,24 @@ namespace gamestoreAPI.Controllers
             }
         }
 
+        [HttpGet]
+        public HttpResponseMessage Get(string id)
+        {
+            SqlCommand cmd;
+            SqlDataAdapter da = new SqlDataAdapter();
+            DataTable dt = new DataTable();
+            SqlConnection con;
+
+            con = new SqlConnection(ConfigurationManager.ConnectionStrings["dataGameStore"].ConnectionString);
+            cmd = new SqlCommand("detailNguoiDung", con);
+            cmd.Parameters.Add(new SqlParameter("@ID_NguoiDung", id));
+            cmd.CommandType = CommandType.StoredProcedure;
+            da.SelectCommand = cmd;
+            da.Fill(dt);
+
+            return Request.CreateResponse(HttpStatusCode.OK, dt);
+        }
+
         [Route("api/NguoiDung/Login/{username}/{password}")]
         [HttpGet]
         public HttpResponseMessage Get(string username, string password)
@@ -266,6 +284,21 @@ namespace gamestoreAPI.Controllers
             con.Close();
             return id;
         }
-        
+
+        [Route("api/NguoiDung/checkUserName/{IDusername}")]
+        [HttpGet]
+        public string checkUserName(string IDusername)
+        {
+            string IDuser = "null";
+            var con = new SqlConnection(ConfigurationManager.ConnectionStrings["dataGameStore"].ConnectionString);
+            var cmd = new SqlCommand("checkUserName", con);
+            cmd.Parameters.Add(new SqlParameter("@UserName_ND", IDusername));
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            if (cmd.ExecuteScalar() != null)
+                IDuser = cmd.ExecuteScalar().ToString();
+            con.Close();
+            return IDuser;
+        }
     }
 }

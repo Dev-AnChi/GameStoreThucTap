@@ -123,7 +123,6 @@ namespace gamestoreAPI.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             da.SelectCommand = cmd;
             da.Fill(dt);
-
             return Request.CreateResponse(HttpStatusCode.OK, dt);
         }
 

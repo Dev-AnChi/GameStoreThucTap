@@ -26,10 +26,10 @@ export class GameComponent implements OnInit {
   }
 
 
-  detailClick(item:any){
-    this.service.setDataGame(item);
-    this.service.setIDGameDetails(item.ID_Game);
-  }
+  // detailClick(item:any){
+  //   this.service.setDataGame(item);
+  //   this.service.setIDGameDetails(item.ID_Game);
+  // }
 
   counter(i: number) {
     return new Array(i);

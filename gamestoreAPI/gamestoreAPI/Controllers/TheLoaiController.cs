@@ -125,5 +125,21 @@ namespace gamestoreAPI.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, dt);
         }
+
+        [Route("api/TheLoai/GetIDNameTheLoai/{name}")]
+        [HttpGet]
+        public string GetIDNameTheLoai(string name)
+        {
+            string ID_Loai = "";
+            var con = new SqlConnection(ConfigurationManager.ConnectionStrings["dataGameStore"].ConnectionString);
+            var cmd = new SqlCommand("getIDNameTheLoai", con);
+            cmd.Parameters.Add(new SqlParameter("@TenTheLoai", name));
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            if (cmd.ExecuteScalar() != null)
+                ID_Loai = cmd.ExecuteScalar().ToString();
+            con.Close();
+            return ID_Loai;
+        }
     }
 }

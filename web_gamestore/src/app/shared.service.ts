@@ -31,7 +31,7 @@ export class SharedService {
     return this.http.get(this.APIUrl + '/Game/'+val);
   }
   UploadImagesGame(val:any){
-    return this.http.post(this.APIUrl+'api/Game/SaveFile', val);
+    return this.http.post(this.APIUrl+'/Game/SaveFile', val);
   }
 
   
@@ -47,6 +47,9 @@ export class SharedService {
   }
   editTheLoai(val:any){
     return this.http.put(this.APIUrl + '/TheLoai',val);
+  }
+  getIDNameTheLoai(val:any){
+    return this.http.get(this.APIUrl + '/TheLoai/GetIDNameTheLoai/' + val);
   }
 
 
@@ -70,27 +73,6 @@ export class SharedService {
     return this.http.post(this.APIUrl+'/HinhAnh/SaveFile', val);
   }
 
-
-
-
-
-  //lấy dữ liệu xem chi tiết game
-  dataGame:any;
-  setDataGame(item:any){
-    this.dataGame=item;
-  }
-  getDataGame(){
-    return this.dataGame;
-  }
-  //lấy dữ liệu ảnh xem chi tiết
-  idGameDetails:any;
-  setIDGameDetails(item:any){
-    this.idGameDetails=item;
-  }
-  getIDGameDetails(){
-    return this.idGameDetails;
-  }  
-
   //Chi tiết game
   getChiTietGamelist():Observable<any[]>{
     return this.http.get<any>(this.APIUrl+'/ChiTietGame');
@@ -107,6 +89,10 @@ export class SharedService {
   //Lấy tên thể loại theo ID game
   getNameTheLoaiChiTietGame(val:any):Observable<any[]>{
     return this.http.get<any[]>(this.APIUrl+'/ChiTietGame/'+val);
+  }
+  //Tìm ID game theo logo
+  getIDNameGame(val:any){
+    return this.http.get(this.APIUrl + '/Game/GetIDNameGame/' + val);
   }
   
 
@@ -126,7 +112,10 @@ export class SharedService {
   editNguoiDung(val:any){
     return this.http.put(this.APIUrl + '/NguoiDung',val);
   }
-  detailNguoiDung(username:any, password:any){
+  detailNguoiDung(val:any){
+    return this.http.get(this.APIUrl + '/NguoiDung/' + val);
+  }
+  loginNguoiDung(username:any, password:any){
     return this.http.get(this.APIUrl + '/NguoiDung/Login/' + username + '/' + password);
   }
   getNameIDNhomChucNang(val:any){
@@ -140,5 +129,65 @@ export class SharedService {
   }
   UploadImagesNguoiDung(val:any){
     return this.http.post(this.APIUrl+'/NguoiDung/SaveFile', val);
+  }
+  checkUserName(val:any){
+    return this.http.get(this.APIUrl+'/NguoiDung/checkUserName/'+val);
+  }
+
+  //Bình luận
+  getBinhLuanlist():Observable<any[]>{
+    return this.http.get<any>(this.APIUrl+'/BinhLuan');
+  }
+  addBinhLuan(val:any){
+    return this.http.post(this.APIUrl+'/BinhLuan',val);
+  }
+  deleteBinhLuan(val:any){
+    return this.http.delete(this.APIUrl+'/BinhLuan/'+val);
+  }
+  editBinhLuan(val:any){
+    return this.http.put(this.APIUrl + '/BinhLuan',val);
+  }
+  getBinhLuanIDGame(val:any):Observable<any[]>{
+    return this.http.get<any>(this.APIUrl + '/BinhLuan/getBinhLuanIDGame/' + val);
+  }
+
+  //game
+  getYeuThichlist():Observable<any[]>{
+    return this.http.get<any>(this.APIUrl+'/YeuThich');
+  }
+  addYeuThich(val:any){
+    return this.http.post(this.APIUrl+'/YeuThich',val);
+  }
+  deleteYeuThich(val:any){
+    return this.http.delete(this.APIUrl+'/YeuThich/'+val);
+  }
+  editYeuThich(val:any){
+    return this.http.put(this.APIUrl + '/YeuThich',val);
+  }
+  getYeuThichIDNguoiDung(val:any):Observable<any[]>{
+    return this.http.get<any>(this.APIUrl + '/YeuThich/getYeuThichIDNguoiDung/' + val);
+  }
+  checkYeuThich(user:any, id:any){
+    return this.http.get(this.APIUrl + '/YeuThich/checkYeuThich/'+user+'/' + id);
+  }
+
+  //game
+  getGameDaTailist():Observable<any[]>{
+    return this.http.get<any>(this.APIUrl+'/GameDaTai');
+  }
+  addGameDaTai(val:any){
+    return this.http.post(this.APIUrl+'/GameDaTai',val);
+  }
+  deleteGameDaTai(val:any){
+    return this.http.delete(this.APIUrl+'/GameDaTai/'+val);
+  }
+  editGameDaTai(val:any){
+    return this.http.put(this.APIUrl + '/GameDaTai',val);
+  }
+  getGameDaTaiIDNguoiDung(val:any):Observable<any[]>{
+    return this.http.get<any>(this.APIUrl + '/GameDaTai/getGameDaTaiIDNguoiDung/' + val);
+  }
+  checkGameDaTai(user:any, id:any){
+    return this.http.get(this.APIUrl + '/GameDaTai/checkGameDaTai/'+user+'/' + id);
   }
 }

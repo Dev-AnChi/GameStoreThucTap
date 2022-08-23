@@ -22,19 +22,20 @@ export class CreateEditGameComponent implements OnInit {
     this.service.getGamelist().subscribe(data=>{
       this.Gamelist=data;
     })
-
   }
 
-  detailClick(item:any){
-    this.service.setDataGame(item);
-    this.service.setIDGameDetails(item.ID_Game);
+
+
+  deleteClick(item:any){
+    if(confirm('Bạn có chắc chắn muốn xóa không ?')){
+      this.service.deleteGame(item).subscribe(data=>{
+        alert(data.toString());
+        this.refreshGameList();
+      });
+    }
   }
   
   counter(i: number) {
     return new Array(i);
-  }
-
-  deleteClick(){
-    alert("Bạn có chắc chắn muốn xóa không ?");
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/shared.service';
+import { Router,ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
@@ -7,7 +8,7 @@ import { SharedService } from 'src/app/shared.service';
 })
 export class EditUserComponent implements OnInit {
 
-  constructor(private service:SharedService) { }
+  constructor(private service:SharedService, private router:Router, private route:ActivatedRoute) { }
   User:any = null;
   imageUrl:any;
   checkLogin:any;
@@ -33,15 +34,22 @@ export class EditUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkLogin=this.service.checkLogin;
-    if(this.checkLogin){
-      this.refreshUser();
+      this.route.params.subscribe(params => {
+        this.ID_NguoiDung = params['id'];
+        if(this.ID_NguoiDung == null)
+          this.ID_NguoiDung = "error";
+        this.refreshUser();
+      });
       this.imageUrl=this.service.ImagesUrl + "/";
-    }
   }
 
   refreshUser(){
-    this.service.detailNguoiDung(this.service.username,this.service.password).subscribe(data=>{
+    this.service.detailNguoiDung(this.ID_NguoiDung).subscribe(data=>{
       this.User=data;
+      if(this.User[0].ID_NguoiDung == 'error'){
+        this.service.checkLogin = false;
+        this.checkLogin = this.service.checkLogin;
+      }
       this.service.getNameIDNhomChucNang(this.User[0].ID_NhomChucNang).subscribe(data1=>{
         this.TenNhomChucNang=data1;
       }
@@ -84,8 +92,14 @@ export class EditUserComponent implements OnInit {
         ,UserName_CapNhat:this.service.username,NgayCapNhat:this.NgayCapNhat,ID_NhomChucNang:this.ID_NhomChucNang};
         alert("Lưu lại những thay đổi ?");
         console.log(val);
-        this.service.editNguoiDung(val).subscribe(res=>alert(res.toString()));
-    })   
+        this.service.editNguoiDung(val).subscribe(res=>{
+          this.refreshUser();
+          alert(res.toString());
+        });
+    })
+
+    //dùng routerlink bằng code 
+    //this.router.navigate(['/user_profile', this.ID_NguoiDung]);
   }
 
   uploadPhoto(event:any){

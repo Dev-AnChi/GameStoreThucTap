@@ -13,8 +13,8 @@
             <div class="col-md-3" *ngFor="let dataItem of Gamelist" style="padding: 15px; padding-top: 0px;">
                 <!-- cài animation cho game hover -->
                 <div [ngClass]="animation" (mouseover)="animation='card p-3 hoverG'" (mouseout)="animation='card p-3'">
-                    <a class="pull-left" [routerLink]="['/detail_game']"
-                        routerLinkActive="router-link-active" (click)="detailClick(dataItem)">
+                    <a class="pull-left" [routerLink]="['/detail_game',dataItem.ID_Game]"
+                        routerLinkActive="router-link-active">
                         <div class="text-center">
                             <img [src]=imageUrl+dataItem.Logo_Game alt="" width="100%" height="150px" title="Xem chi tiết"/>
                         </div>
@@ -24,7 +24,7 @@
                         <span>{{dataItem.LuotTaiXuong}} lượt tải xuống</span>
                         <span class="font-weight-bold d-block">Giá : {{dataItem.Gia}}</span>
                         <div class="buttons d-flex flex-row row">
-                            <a (click)="deleteClick()" class="col-md-6">
+                            <a (click)="deleteClick(dataItem.ID_Game)" class="col-md-6">
                                 <button class="btn btn-success cart-button
                                     btn-block" style="background-color: red;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
@@ -34,7 +34,7 @@
                                 </button>
                             </a>
                             <br>
-                            <a [routerLink]="['/edit-game']" routerLinkActive="router-link-active" class="col-md-6" >
+                            <a [routerLink]="['/edit-game', dataItem.ID_Game]" routerLinkActive="router-link-active" class="col-md-6" >
                                 <button class="btn btn-success cart-button
                                     btn-block" style="background-color: blue;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -46,7 +46,7 @@
                             </a>
                         </div>
                         <div class="weight">
-                            <small><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> <i class="fa fa-star"></i> 4.0/5.0</small>
+                            <small><span *ngFor="let in of counter(dataItem.DanhGiaTB) ;let i = index"><i class="fa fa-star" ></i></span><span *ngFor="let in of counter(5-dataItem.DanhGiaTB) ;let i = index"><i class="fa fa-star" style="color: gray;"></i> </span> {{dataItem.DanhGiaTB}}/5.0 </small>
                         </div>
                     </div>
                 </div>

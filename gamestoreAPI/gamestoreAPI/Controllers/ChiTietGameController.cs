@@ -38,7 +38,6 @@ namespace gamestoreAPI.Controllers
             {
                 con = new SqlConnection(ConfigurationManager.ConnectionStrings["dataGameStore"].ConnectionString);
                 cmd = new SqlCommand("createChiTietGame", con);
-                //cmd.Parameters.Add(new SqlParameter("@TenTheLoai", tl.TenTheLoai));
                 cmd.Parameters.AddWithValue("@ID_Game", ctg.ID_Game);
                 cmd.Parameters.AddWithValue("@ID_Loai", ctg.ID_Loai);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -106,7 +105,7 @@ namespace gamestoreAPI.Controllers
             }
         }
 
-        //Get thể loại the ID game
+        //Get thể loại theo ID game
         public HttpResponseMessage Get(int id)
         {
             SqlCommand cmd;
@@ -124,5 +123,20 @@ namespace gamestoreAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, dt);
 
         }
+/*
+        public HttpResponseMessage Get(List<string> dataIDBinhLuan)
+        {
+            SqlCommand cmd;
+            SqlDataAdapter da = new SqlDataAdapter();
+            DataTable dt = new DataTable();
+            SqlConnection con;
+
+            string id;
+            for(int i=0; i<= dataIDBinhLuan.Count; i++)
+            {
+                id = dataIDBinhLuan[0];
+            }            
+
+        }*/
     }
 }

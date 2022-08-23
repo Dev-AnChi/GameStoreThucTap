@@ -51,7 +51,9 @@ namespace gamestoreAPI.Controllers
                 cmd.Parameters.Add(new SqlParameter("@SoHieuPhienBan", g.SoHieuPhienBan));
                 cmd.Parameters.Add(new SqlParameter("@PhienBan", g.PhienBan));
                 cmd.Parameters.Add(new SqlParameter("@YC_CauHinh", g.YC_CauHinh));
+                g.LuotTaiXuong = 0;
                 cmd.Parameters.Add(new SqlParameter("@LuotTaiXuong", g.LuotTaiXuong));
+                g.DanhGiaTB = 0;
                 cmd.Parameters.Add(new SqlParameter("@DanhGiaTB", g.DanhGiaTB));
                 cmd.Parameters.Add(new SqlParameter("@GioiHan_Tuoi", g.GioiHan_Tuoi));
                 cmd.Parameters.Add(new SqlParameter("@Gia", g.Gia));
@@ -99,8 +101,6 @@ namespace gamestoreAPI.Controllers
                 cmd.Parameters.Add(new SqlParameter("@GioiHan_Tuoi", g.GioiHan_Tuoi));
                 cmd.Parameters.Add(new SqlParameter("@Gia", g.Gia));
                 cmd.Parameters.Add(new SqlParameter("@MoTaChiTiet", g.MoTaChiTiet));
-                cmd.Parameters.Add(new SqlParameter("@UserName_Tao", g.UserName_Tao));
-                cmd.Parameters.Add(new SqlParameter("@NgayTao", g.NgayTao));
                 cmd.Parameters.Add(new SqlParameter("@UserName_CapNhat", g.UserName_CapNhat));
                 cmd.Parameters.Add(new SqlParameter("@NgayCapNhat", g.NgayCapNhat));
                 cmd.Parameters.Add(new SqlParameter("@Logo_Game", g.Logo_Game));
@@ -188,24 +188,20 @@ namespace gamestoreAPI.Controllers
             }
         }
 
-/*
-        [Route("api/Game/GetIDNameTheLoai")]
+        [Route("api/Game/GetIDNameGame/{name}")]
         [HttpGet]
-        public HttpResponseMessage GetIDNameTheLoai(int id)
+        public string GetIDNameTheLoai(string name)
         {
-            string query = @"select TenTheLoai from dbo.TheLoai where ID_TheLoai='" + id + @"'";
-
-            DataTable table = new DataTable();
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["dataGameStore"].ConnectionString))
-            using (var cmd = new SqlCommand(query, con))
-            using (var da = new SqlDataAdapter(cmd))
-            {
-                cmd.CommandType = CommandType.Text;
-                da.Fill(table);
-            }
-
-            return Request.CreateResponse(HttpStatusCode.OK, table);
+            string ID_Game = "error";
+            var con = new SqlConnection(ConfigurationManager.ConnectionStrings["dataGameStore"].ConnectionString);
+            var cmd = new SqlCommand("getIDNameLogo", con);
+            cmd.Parameters.Add(new SqlParameter("@Ten_Game", name));
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            if (cmd.ExecuteScalar() != null)
+                ID_Game = cmd.ExecuteScalar().ToString();
+            con.Close();
+            return ID_Game;
         }
-*/
     }
 }

@@ -161,23 +161,35 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\BinhLuanController.cs" />
     <Compile Include="Controllers\ChiTietGameController.cs" />
+    <Compile Include="Controllers\ChucNangController.cs" />
+    <Compile Include="Controllers\CN_NhomCNController.cs" />
     <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\GameDaTaiController.cs" />
     <Compile Include="Controllers\HinhAnhController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\NhomChucNangController.cs" />
     <Compile Include="Controllers\TheLoaiController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\YeuThichController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BinhLuanModel.cs" />
     <Compile Include="Models\ChiTietGameModel.cs" />
+    <Compile Include="Models\ChucNangModel.cs" />
+    <Compile Include="Models\CN_NhomCNModel.cs" />
+    <Compile Include="Models\GameDaTaiModel.cs" />
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\HinhAnhModel.cs" />
+    <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\NguoiDungModel.cs" />
     <Compile Include="Models\NhomChucNangModel.cs" />
     <Compile Include="Models\TheLoaiModel.cs" />
+    <Compile Include="Models\YeuThichModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
