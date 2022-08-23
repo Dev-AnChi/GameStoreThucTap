@@ -24,6 +24,7 @@ import { CreateUserComponent } from './create-edit-user/create-user/create-user.
 import { EditUserComponent } from './create-edit-user/edit-user/edit-user.component';
 import { EditImageMHComponent } from './create-edit-game/edit-game/edit-image-mh/edit-image-mh.component';
 import { EditTheloaiComponent } from './create-edit-game/edit-game/edit-theloai/edit-theloai.component';
+import { TheloaiEditComponent } from './theloai/theloai-edit/theloai-edit.component';
 
 // add service
 import { SharedService } from './shared.service'; 
@@ -35,6 +36,7 @@ import { CreateTheloaiComponent } from './create-edit-game/create-game/create-th
 import { GameDownloadComponent } from './game-download/game-download.component';
 import { GameLikeComponent } from './game-like/game-like.component';
 import { OtherComponent } from './other/other.component';
+import { TheloaiComponent } from './theloai/theloai.component';
 
 
 @NgModule({
@@ -58,7 +60,8 @@ import { OtherComponent } from './other/other.component';
     GameDownloadComponent,
     GameLikeComponent,
     OtherComponent,
-
+    TheloaiComponent,
+    TheloaiEditComponent,
   ],
   imports: [
     BrowserModule,

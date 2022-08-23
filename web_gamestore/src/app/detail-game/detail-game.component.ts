@@ -195,6 +195,13 @@ export class DetailGameComponent implements OnInit {
     })
   }
 
+  deleteBinhLuan(id:any){
+    this.service.deleteBinhLuan(id).subscribe(res=>{
+      this.refreshBinhLuan();
+      alert(res.toString());
+    })
+  }
+
   counter(i: number) {
     i = Math.round(i);
     return new Array(i);

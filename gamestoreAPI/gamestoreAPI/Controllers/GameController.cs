@@ -286,5 +286,25 @@ namespace gamestoreAPI.Controllers
             }
         }
 
+        [Route("api/Game/findGame/{keyword}")]
+        [HttpGet]
+        public HttpResponseMessage findGame(string keyword)
+        {
+            SqlCommand cmd;
+            SqlDataAdapter da = new SqlDataAdapter();
+            DataTable dt = new DataTable();
+            SqlConnection con;
+
+            con = new SqlConnection(ConfigurationManager.ConnectionStrings["dataGameStore"].ConnectionString);
+            cmd = new SqlCommand("findGame", con);
+            cmd.Parameters.Add(new SqlParameter("@keyword", keyword));
+            cmd.CommandType = CommandType.StoredProcedure;
+            da.SelectCommand = cmd;
+            da.Fill(dt);
+
+            return Request.CreateResponse(HttpStatusCode.OK, dt);
+        }
+
+
     }
 }

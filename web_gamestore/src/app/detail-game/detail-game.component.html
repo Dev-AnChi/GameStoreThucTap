@@ -36,8 +36,8 @@
                 </button>
             </div>    
           </div>
-        <div class="bottom-wrap" > <a class="btn btn-primary pull-right" data-abc="true" style="background-color: green; border: none;" (click)="clickDowload()">
-          <span *ngIf=!isGameDaTai>Tải xuống </span> <span *ngIf=isGameDaTai>Gỡ cài đặt</span></a>
+        <div class="bottom-wrap" > <a class="btn btn-primary pull-right" data-abc="true" style="background-color: white; border: solid 1px black;" (click)="clickDowload()">
+          <span *ngIf=!isGameDaTai style="color: green;">Cài đặt </span> <span *ngIf=isGameDaTai style="color: red;">Gỡ cài đặt</span></a>
             <div class="price-wrap" *ngIf="!isYeuThich"> 
                 <a class="btn btn-warning float-left like-game" data-abc="true" style="border: solid 1px green;" (click)="clickLike()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16" >
@@ -47,9 +47,9 @@
                 </a> 
             </div>
             <div class="price-wrap" *ngIf="isYeuThich"> 
-              <a class="btn btn-warning float-left like-game" data-abc="true" style="border: solid 1px red;" (click)="clickLike()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16" style="color: red;">
-                  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+              <a class="btn btn-warning float-left like-game" data-abc="true" style="border: solid 1px red; color: red;" (click)="clickLike()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16" style="color: red;">
+                  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
                 </svg>
                 Yêu thích
               </a> 
@@ -197,15 +197,19 @@
                               </div>
                             <p>
                             {{listBinhLuan[i].NoiDungBL}}
-                          </p>
+                            </p>
           
-                          <!-- <div class="d-flex justify-content-between align-items-center">
+                          <div class="d-flex justify-content-between align-items-center" *ngIf="User[0].ID_NhomChucNang=='NCN1'">
                             <div class="d-flex align-items-center">
-                              <a href="#!" class="link-muted me-2"><i class="fas fa-thumbs-up me-1"></i>132</a>
-                              <a href="#!" class="link-muted"><i class="fas fa-thumbs-down me-1"></i>15</a>
                             </div>
-                            <a href="#!" class="link-muted"><i class="fas fa-reply me-1"></i> Reply</a>
-                          </div> -->
+                            <a class="link-muted">
+                              <button class="btn" style="border: solid 1px red;" (click)="deleteBinhLuan(listBinhLuan[i].ID_BinhLuan)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16" style="color: red;">
+                                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                </svg>
+                              </button>
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>

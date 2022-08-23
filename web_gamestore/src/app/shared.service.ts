@@ -13,6 +13,8 @@ export class SharedService {
   readonly ImagesUrl = "https://localhost:44325/Images";
 
   constructor(private http:HttpClient) { }
+  isAdmin:any;
+
 
   //game
   getGamelist():Observable<any[]>{
@@ -54,6 +56,9 @@ export class SharedService {
   }
   editTheLoai(val:any){
     return this.http.put(this.APIUrl + '/TheLoai',val);
+  }
+  detailTheLoai(val:any){
+    return this.http.get(this.APIUrl + '/TheLoai/' + val);
   }
   getIDNameTheLoai(val:any){
     return this.http.get(this.APIUrl + '/TheLoai/GetIDNameTheLoai/' + val);
@@ -105,7 +110,9 @@ export class SharedService {
   getGamelistIDTheLoai(val:any):Observable<any[]>{
     return this.http.get<any[]>(this.APIUrl + '/ChiTietGame/getGamelistIDTheLoai/' + val);
   }
-  
+  findGame(val:any):Observable<any[]>{
+    return this.http.get<any[]>(this.APIUrl + '/Game/findGame/' + val);
+  }
 
   //Người dùng
   checkLogin:boolean=false;

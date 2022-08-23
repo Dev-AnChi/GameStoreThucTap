@@ -29,17 +29,17 @@ export class RegisterComponent implements OnInit {
   listNhomChucNang:any=[];
 
   ngOnInit(): void {
-    this.loadListNhomChucNang();
+    //this.loadListNhomChucNang();
   }
 
-  loadListNhomChucNang(){
-    this.service.getAllNameNhomChucNang().subscribe((data:any)=>{
-      this.listNhomChucNang=data;
-    })
-  }
+  // loadListNhomChucNang(){
+  //   this.service.getAllNameNhomChucNang().subscribe((data:any)=>{
+  //     this.listNhomChucNang=data;
+  //   })
+  // }
 
   saveUserClick(){
-    this.service.getIDNameNhomChucNang(this.TenNhomChucNang).subscribe((data:any)=>{
+    this.service.getIDNameNhomChucNang("User").subscribe((data:any)=>{
         this.ID_NhomChucNang = data;
         this.service.checkUserName(this.UserName_ND).subscribe(IDusername=>{
           if(IDusername=='null'){

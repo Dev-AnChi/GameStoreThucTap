@@ -18,6 +18,8 @@ import { CreateTheloaiComponent } from './create-edit-game/create-game/create-th
 import { GameDownloadComponent } from './game-download/game-download.component';
 import { GameLikeComponent } from './game-like/game-like.component';
 import { OtherComponent } from './other/other.component';
+import { TheloaiComponent } from './theloai/theloai.component';
+import { TheloaiEditComponent } from './theloai/theloai-edit/theloai-edit.component';
 const routes: Routes = [
   {path:"", component:GameComponent},
   {path:"game", component:GameComponent},
@@ -39,7 +41,9 @@ const routes: Routes = [
   {path:"create-game/create-theloai/:id", component:CreateTheloaiComponent},
   {path:"game-download/:id", component:GameDownloadComponent},
   {path:"game-like/:id", component:GameLikeComponent},
-  {path:"other", component:OtherComponent},
+  {path:"other/:keyword", component:OtherComponent},
+  {path:"theloai", component:TheloaiComponent},
+  {path:"theloai-edit/:id", component:TheloaiEditComponent},
 ];
 
 @NgModule({

@@ -109,7 +109,7 @@ namespace gamestoreAPI.Controllers
 
         //details
         [HttpGet]
-        public HttpResponseMessage Get(string id)
+        public HttpResponseMessage Get(int id)
         {
             SqlCommand cmd;
             SqlDataAdapter da = new SqlDataAdapter();

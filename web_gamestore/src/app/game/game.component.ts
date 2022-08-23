@@ -30,7 +30,6 @@ export class GameComponent implements OnInit {
   refreshGameList(){
     this.service.getGamelist().subscribe(data=>{
       this.Gamelist=data;
-      console.log(data);
     })
   }
 
