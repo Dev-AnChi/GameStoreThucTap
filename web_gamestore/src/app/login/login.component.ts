@@ -14,14 +14,16 @@ export class LoginComponent implements OnInit {
   username:string="";
   password:string="";
 
+  id_nguoidung:string="";
+
   ngOnInit(): void {
-    this.service.username=this.username;
-    this.service.password=this.password; 
+    this.service.username = this.username;
+    this.service.password = this.password;
   }
 
   clickLogin(){
-    this.service.username=this.username;
-    this.service.password=this.password;
+    this.service.username = this.username;
+    this.service.password = this.password;
     if(this.username==""){
       this.service.username="error";
     }
@@ -31,7 +33,10 @@ export class LoginComponent implements OnInit {
 
     this.service.loginNguoiDung(this.service.username,this.service.password).subscribe(data=>{
       this.User=data;
-      if(this.User[0].ID_NguoiDung == 'error'){
+      console.log(this.service.username + "  " + this.service.password);
+      this.id_nguoidung = this.User[0].ID_NguoiDung
+      console.log(this.id_nguoidung);
+      if(this.id_nguoidung == 'error'){
         this.service.checkLogin = false;
         this.checkLogin = this.service.checkLogin;
       }
