@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -105,7 +106,7 @@ namespace gamestoreAPI.Controllers
                 cmd.Parameters.Add(new SqlParameter("@Password_ND", nd.Password_ND));
                 cmd.Parameters.Add(new SqlParameter("@TenNguoiDung", nd.TenNguoiDung));
                 cmd.Parameters.Add(new SqlParameter("@GioiTinh", nd.GioiTinh));
-                cmd.Parameters.Add(new SqlParameter("@NgaySinh", nd.NgaySinh));
+                cmd.Parameters.Add(new SqlParameter("@NgaySinh",nd.NgaySinh));
                 cmd.Parameters.Add(new SqlParameter("@Email", nd.Email));
                 cmd.Parameters.Add(new SqlParameter("@DiaChi", nd.DiaChi));
                 cmd.Parameters.Add(new SqlParameter("@SDT", nd.SDT));

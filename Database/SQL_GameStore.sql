@@ -1,10 +1,10 @@
--- CREATE DATABASE GAMESTORE
--- GO 
--- USE GAMESTORE
--- GO
+CREATE DATABASE GameStore
+GO 
+USE GameStore
+GO
 
 CREATE TABLE NhomChucNang(
-    ID_NhomChucNang VARCHAR(20) PRIMARY KEY NOT NULL,--ID sẽ tự sinh có dạng (06072020120610000001) ---> ID = DateTime tạo + Stt tạo trong ngày
+    ID_NhomChucNang VARCHAR(20) PRIMARY KEY NOT NULL,--ID sẽ tự sinh có dạng ID="NCN"+list.size()
     TenNhomChucNang NVARCHAR(50)
 )
 GO
@@ -57,6 +57,7 @@ CREATE TABLE Game(
     NgayCapNhat datetime,
     Logo_Game NVARCHAR(50),
 )
+
 GO
 CREATE TABLE BinhLuan(
     ID_BinhLuan INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
@@ -150,6 +151,15 @@ BEGIN
     SELECT * FROM NhomChucNang WHERE ID_NhomChucNang=@ID_NhomChucNang
 END
 GO
+--đếm nhóm chức năng
+CREATE PROC countNhomChucNang
+AS
+BEGIN
+    SELECT COUNT(ID_NhomChucNang) as 'countNCN' FROM NhomChucNang
+END
+GO
+
+GO
 ----------------------------------Xem ChucNang----------------------------------------------------------------
 CREATE PROC getChucNang
 AS
@@ -191,6 +201,14 @@ AS
 BEGIN
     SELECT* FROM ChucNang
     WHERE ID_ChucNang=@ID_ChucNang
+END
+GO
+
+--đếm chức năng
+CREATE PROC countChucNang
+AS
+BEGIN
+    SELECT COUNT(ID_ChucNang) as 'countCN' FROM ChucNang
 END
 GO
 -----------------------------------Xem CN_NhomCN----------------------------------------------------------------
@@ -250,20 +268,20 @@ CREATE PROC createNguoiDung
 AS
 BEGIN
     INSERT INTO NguoiDung (ID_NguoiDung,NickName,UserName_ND,Password_ND,TenNguoiDung,GioiTinh,NgaySinh,Email,DiaChi,SDT,AnhDaiDien,UserName_Tao,NgayTao,UserName_CapNhat,NgayCapNhat,ID_NhomChucNang)
-    VALUES(@ID_NguoiDung,@NickName, @UserName_ND,@Password_ND,@TenNguoiDung,@GioiTinh,TRY_CONVERT(DATETIME,@NgaySinh,103),@Email,@DiaChi,
-            @SDT,@AnhDaiDien,@UserName_Tao,TRY_CONVERT(DATETIME,@NgayTao,120),@UserName_CapNhat,TRY_CONVERT(DATETIME,@NgayCapNhat,120),@ID_NhomChucNang)
+    VALUES(@ID_NguoiDung,@NickName, @UserName_ND,@Password_ND,@TenNguoiDung,@GioiTinh,CONVERT(DATE, @NgaySinh,111),@Email,@DiaChi,
+            @SDT,@AnhDaiDien,@UserName_Tao,CONVERT(DATETIME, @NgayTao,120),@UserName_CapNhat,CONVERT(DATETIME,@NgayCapNhat,120),@ID_NhomChucNang)
 END
 GO
 
 --Sửa NguoiDung
 CREATE PROC editNguoiDung
 (@ID_NguoiDung VARCHAR(20),@NickName NVARCHAR(50), @UserName_ND VARCHAR(50),@Password_ND VARCHAR(200),@TenNguoiDung NVARCHAR(100),@GioiTinh bit,@NgaySinh varchar(50),@Email VARCHAR(100),@DiaChi NTEXT,
-@SDT VARCHAR(11),@AnhDaiDien NVARCHAR(50),@UserName_Tao VARCHAR(50),@NgayTao VARCHAR(50),@UserName_CapNhat VARCHAR(50),@NgayCapNhat VARCHAR(50),@ID_NhomChucNang VARCHAR(20))
+@SDT VARCHAR(11),@AnhDaiDien NVARCHAR(50),@UserName_CapNhat VARCHAR(50),@NgayCapNhat VARCHAR(50),@ID_NhomChucNang VARCHAR(20))
 AS
 BEGIN
     UPDATE NguoiDung
-    SET NickName=@NickName,UserName_ND=@UserName_ND,Password_ND=@Password_ND,TenNguoiDung=@TenNguoiDung,GioiTinh=@GioiTinh,NgaySinh=TRY_CONVERT(DATETIME,@NgaySinh,103),Email=@Email,DiaChi=@DiaChi,
-            SDT=@SDT,AnhDaiDien=@AnhDaiDien,UserName_Tao=@UserName_Tao,NgayTao=TRY_CONVERT(DATETIME,@NgayTao,120),UserName_CapNhat=@UserName_CapNhat,NgayCapNhat=TRY_CONVERT(DATETIME,@NgayCapNhat,120),ID_NhomChucNang=@ID_NhomChucNang
+    SET NickName=@NickName,UserName_ND=@UserName_ND,Password_ND=@Password_ND,TenNguoiDung=@TenNguoiDung,GioiTinh=@GioiTinh,NgaySinh=CONVERT(DATE, @NgaySinh ,111),Email=@Email,DiaChi=@DiaChi,
+            SDT=@SDT,AnhDaiDien=@AnhDaiDien,UserName_CapNhat=@UserName_CapNhat,NgayCapNhat=CONVERT(DATETIME, @NgayCapNhat ,120),ID_NhomChucNang=@ID_NhomChucNang
     WHERE ID_NguoiDung = @ID_NguoiDung
 END
 GO
@@ -286,7 +304,44 @@ BEGIN
     WHERE ID_NguoiDung=@ID_NguoiDung
 END
 GO
-
+--đếm số người dùng
+CREATE PROC countNguoiDung
+AS
+BEGIN
+    SELECT COUNT(ID_NguoiDung) FROM NguoiDung
+END
+GO
+CREATE PROC LoginNguoiDung
+(@UserName_ND VARCHAR(50),@Password_ND VARCHAR(200))
+AS
+BEGIN
+    SELECT ID_NguoiDung FROM NguoiDung WHERE @UserName_ND=UserName_ND AND @Password_ND=Password_ND
+END
+GO
+--get ID bằng name nhóm chức năng
+CREATE PROC getIDNameNhomChucNang
+(@TenNhomChucNang NVARCHAR(50))
+AS
+BEGIN
+    SELECT ID_NhomChucNang FROM NhomChucNang WHERE TenNhomChucNang = @TenNhomChucNang
+END
+GO
+--get name bằng ID nhóm chức năng
+CREATE PROC getNameIDNhomChucNang
+(@ID_NhomChucNang VARCHAR(20))
+AS
+BEGIN
+    SELECT TenNhomChucNang FROM NhomChucNang WHERE ID_NhomChucNang = @ID_NhomChucNang
+END
+GO
+--kiểm tra tên người dùng đã tồn tại hay chưa
+CREATE PROC checkUserName
+(@UserName_ND VARCHAR(50))
+AS
+BEGIN
+    SELECT ID_NguoiDung FROM NguoiDung WHERE UserName_ND = @UserName_ND
+END
+GO
 ---------------------------------Xem BinhLuan------------------------------------------------------------------
 CREATE PROC getBinhLuan
 AS
@@ -296,19 +351,19 @@ END
 GO
 --Thêm BinhLuan
 CREATE PROC createBinhLuan
-(@DanhGia int,@NoiDungBL NTEXT,@NgayBinhLuan varchar(50),@ID_NguoiBinhLuan VARCHAR(10),@ID_Game INT)
+(@DanhGia int,@NoiDungBL NTEXT,@NgayBinhLuan varchar(50),@ID_NguoiBinhLuan VARCHAR(20),@ID_Game INT)
 AS
 BEGIN
-    INSERT INTO BinhLuan(DanhGia,NoiDungBL,NgayBinhLuan,ID_NguoiBinhLuan,ID_Game) VALUES(@DanhGia,@NoiDungBL,TRY_CONVERT(DATETIME,@NgayBinhLuan,120) ,@ID_NguoiBinhLuan,@ID_Game)
+    INSERT INTO BinhLuan(DanhGia,NoiDungBL,NgayBinhLuan,ID_NguoiBinhLuan,ID_Game) VALUES(@DanhGia,@NoiDungBL,CONVERT(DATETIME, @NgayBinhLuan ,120) ,@ID_NguoiBinhLuan,@ID_Game)
 END
 GO
 --Sửa BinhLuan
 CREATE PROC editBinhLuan
-(@ID_BinhLuan INT,@DanhGia int,@NoiDungBL NVARCHAR(50),@NgayBinhLuan VARCHAR(50),@ID_NguoiBinhLuan VARCHAR(10),@ID_Game INT)
+(@ID_BinhLuan INT,@DanhGia int,@NoiDungBL NVARCHAR(50),@NgayBinhLuan VARCHAR(50),@ID_NguoiBinhLuan VARCHAR(20),@ID_Game INT)
 AS
 BEGIN
     UPDATE BinhLuan
-    SET DanhGia=@DanhGia,NoiDungBL=@NoiDungBL,NgayBinhLuan=TRY_CONVERT(DATETIME,@NgayBinhLuan,120),ID_NguoiBinhLuan=@ID_NguoiBinhLuan,ID_Game=@ID_Game
+    SET DanhGia=@DanhGia,NoiDungBL=@NoiDungBL,NgayBinhLuan=CONVERT(DATETIME, @NgayBinhLuan ,120),ID_NguoiBinhLuan=@ID_NguoiBinhLuan,ID_Game=@ID_Game
     WHERE ID_BinhLuan = @ID_BinhLuan
 END
 GO
@@ -330,6 +385,24 @@ BEGIN
     WHERE ID_BinhLuan = @ID_BinhLuan
 END
 GO
+--Xem BinhLuan theo ID Game
+CREATE PROC getBinhLuanIDGame
+(@ID_Game INT)
+AS
+BEGIN
+    SELECT* FROM BinhLuan
+    WHERE ID_Game = @ID_Game
+END
+GO
+--count đánh giá
+CREATE PROC countDanhGia
+(@ID_Game int)
+AS
+BEGIN
+    SELECT AVG(DanhGia+0.0) FROM BinhLuan
+    WHERE ID_Game = @ID_Game
+END
+GO
 -----------------------------------Xem Game------------------------------------------------------------------
 CREATE PROC getGame
 AS
@@ -348,21 +421,30 @@ BEGIN
                     YC_CauHinh,LuotTaiXuong,DanhGiaTB,GioiHan_Tuoi,Gia,MoTaChiTiet,UserName_Tao,NgayTao,UserName_CapNhat,NgayCapNhat,Logo_Game)
     VALUES(@Ten_Game,@Ten_NhaSanXuat,@SoHieuPhienBan,@PhienBan,
             @YC_CauHinh,@LuotTaiXuong,@DanhGiaTB,@GioiHan_Tuoi,@Gia,@MoTaChiTiet,
-            @UserName_Tao,TRY_CONVERT(DATETIME,@NgayTao,120),@UserName_CapNhat,TRY_CONVERT(DATETIME,@NgayCapNhat,120),@Logo_Game)
+            @UserName_Tao,CONVERT(DATETIME, @NgayTao ,120),@UserName_CapNhat,CONVERT(DATETIME, @NgayCapNhat ,120),@Logo_Game)
 END
 GO
 --Sửa Game
 CREATE PROC editGame
 (@ID_Game INT,@Ten_Game NVARCHAR(200),@Ten_NhaSanXuat NVARCHAR(100),@SoHieuPhienBan INT,@PhienBan VARCHAR(10),
 @YC_CauHinh NVARCHAR(50),@LuotTaiXuong int,@DanhGiaTB FLOAT,@GioiHan_Tuoi int,@Gia FLOAT,@MoTaChiTiet ntext,
-@UserName_Tao VARCHAR(10),@NgayTao varchar(50),@UserName_CapNhat VARCHAR(10),@NgayCapNhat varchar(50),@Logo_Game NVARCHAR(50))
+@UserName_CapNhat VARCHAR(10),@NgayCapNhat varchar(50),@Logo_Game NVARCHAR(50))
 AS
 BEGIN
     UPDATE Game
     SET Ten_Game=@Ten_Game,Ten_NhaSanXuat=@Ten_NhaSanXuat,SoHieuPhienBan=@SoHieuPhienBan,PhienBan=@PhienBan,YC_CauHinh=@YC_CauHinh,
-    LuotTaiXuong=@LuotTaiXuong,DanhGiaTB=@DanhGiaTB,GioiHan_Tuoi=@GioiHan_Tuoi,Gia=@Gia,MoTaChiTiet=@MoTaChiTiet,UserName_Tao=@UserName_Tao,NgayTao=TRY_CONVERT(DATETIME,@NgayTao,120),
-    UserName_CapNhat=@UserName_CapNhat,NgayCapNhat=TRY_CONVERT(DATETIME,@NgayCapNhat,120),Logo_Game=@Logo_Game
+    LuotTaiXuong=@LuotTaiXuong,DanhGiaTB=@DanhGiaTB,GioiHan_Tuoi=@GioiHan_Tuoi,Gia=@Gia,MoTaChiTiet=@MoTaChiTiet,
+    UserName_CapNhat=@UserName_CapNhat,NgayCapNhat=CONVERT(DATETIME, @NgayCapNhat ,120),Logo_Game=@Logo_Game
     WHERE ID_Game = @ID_Game
+END
+GO
+--Tăng số lượt tải game
+CREATE PROC editGameLuotTai(@ID_Game int)
+AS
+BEGIN
+	UPDATE Game
+	Set LuotTaiXuong = LuotTaiXuong+1
+	Where ID_Game=@ID_Game
 END
 GO
 --Xóa Game
@@ -382,8 +464,33 @@ BEGIN
     SELECT* FROM Game
     WHERE ID_Game = @ID_Game
 END
+go
+--Tìm id game theo logo
+CREATE PROC getIDNameLogo
+(@Ten_Game NVARCHAR(50))
+AS
+BEGIN
+    SELECT ID_Game FROM Game
+    WHERE Ten_Game = @Ten_Game
+END
 GO
------------------------------------Xem HinhAnh------------------------------------------------------------------
+CREATE PROC editGameDanhGia
+(@ID_Game INT,@DanhGiaTB FLOAT)
+AS
+BEGIN
+    UPDATE Game
+    SET DanhGiaTB=@DanhGiaTB
+    WHERE ID_Game = @ID_Game
+END
+GO
+CREATE PROC findGame
+(@keyword NVARCHAR(50))
+AS
+BEGIN
+    select * from Game WHERE Ten_Game like ('%'+@keyword+'%')
+END
+GO
+GO-----------------------------------Xem HinhAnh------------------------------------------------------------------
 CREATE PROC getHinhAnh
 AS
 BEGIN
@@ -431,19 +538,9 @@ CREATE PROC getIDHinhAnh
 (@ID_Game int)
 AS
 BEGIN
-    SELECT AnhMH FROM HinhAnh
+    SELECT * FROM HinhAnh
     WHERE ID_Game=@ID_Game
 END
-GO
---Lấy thể loại đại diện
-CREATE PROC getMainTheLoai
-()
-AS
-BEGIN
-    SELECT Top(1) TenTheLoai FROM Game g, ChiTietGame ctg, TheLoai tl
-    WHERE g.ID_Game=ctg.ID_Game and tl.ID_Loai=ctg.ID_Loai
-END
-GO
 GO
 -----------------------------------Xem TheLoai------------------------------------------------------------------
 CREATE PROC getTheLoai
@@ -486,6 +583,15 @@ AS
 BEGIN
     SELECT* FROM TheLoai
     WHERE ID_Loai = @ID_Loai
+END
+GO
+--Xem ID theo tên thể loại
+CREATE PROC getIDNameTheLoai
+(@TenTheLoai NVARCHAR(50))
+AS
+BEGIN
+    SELECT* FROM TheLoai
+    WHERE TenTheLoai = @TenTheLoai
 END
 GO
 -----------------------------------Xem ChiTietGame------------------------------------------------------------------
@@ -536,10 +642,18 @@ CREATE PROC ID_GameChiTietGame
 (@ID_Game INT)
 AS
 BEGIN
-    SELECT TenTheLoai FROM ChiTietGame ctg, TheLoai tl
+    SELECT ctg.ID_ChiTietGame,tl.ID_Loai,TenTheLoai FROM ChiTietGame ctg, TheLoai tl
     WHERE ID_Game = @ID_Game and tl.ID_Loai=ctg.ID_Loai
 END
-
+GO
+--Tìm game theo tên thể loại
+CREATE PROC getGamelistIDTheLoai
+(@ID_Loai INT)
+AS
+BEGIN
+    SELECT * FROM ChiTietGame ctg, TheLoai tl, Game g
+    WHERE ctg.ID_Game = g.ID_Game and tl.ID_Loai=ctg.ID_Loai and tl.ID_Loai=@ID_Loai
+END
 GO
 -----------------------------------Xem GameDaTai------------------------------------------------------------------
 CREATE PROC getGameDaTai
@@ -553,7 +667,7 @@ CREATE PROC createGameDaTai
 (@CapNhat bit,@NgayTai VARCHAR(50), @ID_NguoiDung VARCHAR(20),@ID_Game INT)
 AS
 BEGIN
-    INSERT INTO GameDaTai(CapNhat,NgayTai,ID_NguoiDung,ID_Game) VALUES(@CapNhat,TRY_CONVERT(DATETIME,@NgayTai,120),@ID_NguoiDung,@ID_Game)
+    INSERT INTO GameDaTai(CapNhat,NgayTai,ID_NguoiDung,ID_Game) VALUES(@CapNhat,CONVERT(DATETIME, @NgayTai,120),@ID_NguoiDung,@ID_Game)
 END
 GO
 
@@ -563,7 +677,7 @@ CREATE PROC editGameDaTai
 AS
 BEGIN
     UPDATE GameDaTai
-    SET CapNhat=@CapNhat,NgayTai=TRY_CONVERT(DATETIME,@NgayTai,120),ID_NguoiDung=@ID_NguoiDung,ID_Game=@ID_Game
+    SET CapNhat=@CapNhat,NgayTai=CONVERT(DATETIME, @NgayTai ,120),ID_NguoiDung=@ID_NguoiDung,ID_Game=@ID_Game
     WHERE ID_GameDaTai = @ID_GameDaTai
 END
 GO
@@ -586,6 +700,32 @@ BEGIN
     WHERE ID_GameDaTai = @ID_GameDaTai
 END
 GO
+--Get GameDaTai theo ID NguoiDung
+CREATE PROC getGameDaTaiIDNguoiDung
+(@ID_NguoiDung VARCHAR(20))
+AS
+BEGIN
+    SELECT* FROM GameDaTai
+    WHERE ID_NguoiDung = @ID_NguoiDung
+END
+GO
+CREATE PROC checkGameDaTai
+(@ID_NguoiDung VARCHAR(20), @ID_Game int)
+AS
+BEGIN
+    SELECT ID_GameDaTai FROM GameDaTai
+    WHERE ID_NguoiDung = @ID_NguoiDung and ID_Game = @ID_Game
+END
+GO
+--count game luot tai ID_Game ------------->>>>
+CREATE PROC countGameDaTai
+( @ID_Game int)
+AS
+BEGIN
+    SELECT COUNT(*) FROM Game
+    WHERE ID_Game = @ID_Game
+END
+GO
 -----------------------------------Xem YeuThich------------------------------------------------------------------
 CREATE PROC getYeuThich
 AS
@@ -598,7 +738,7 @@ CREATE PROC createYeuThich
 (@NgayThich varchar(50),@ID_NguoiDung VARCHAR(20),@ID_Game INT)
 AS
 BEGIN
-    INSERT INTO YeuThich(NgayThich,ID_NguoiDung,ID_Game) VALUES(TRY_CONVERT(DATETIME,@NgayThich,120),@ID_NguoiDung,@ID_Game)
+    INSERT INTO YeuThich(NgayThich,ID_NguoiDung,ID_Game) VALUES(CONVERT(DATETIME, @NgayThich ,120),@ID_NguoiDung,@ID_Game)
 END
 GO
 
@@ -608,7 +748,7 @@ CREATE PROC editYeuThich
 AS
 BEGIN
     UPDATE YeuThich
-    SET NgayThich=TRY_CONVERT(DATETIME,@NgayThich,120),ID_NguoiDung=@ID_NguoiDung,ID_Game=@ID_Game
+    SET NgayThich=CONVERT(DATETIME,@NgayThich,120),ID_NguoiDung=@ID_NguoiDung,ID_Game=@ID_Game
     WHERE ID_YeuThich = @ID_YeuThich
 END
 GO
@@ -629,6 +769,23 @@ AS
 BEGIN
     SELECT* FROM YeuThich
     WHERE ID_YeuThich = @ID_YeuThich
+END
+GO
+--Get YeuThich theo ID NguoiDung
+CREATE PROC getYeuThichIDNguoiDung
+(@ID_NguoiDung VARCHAR(20))
+AS
+BEGIN
+    SELECT* FROM YeuThich
+    WHERE ID_NguoiDung = @ID_NguoiDung
+END
+GO
+CREATE PROC checkYeuThich
+(@ID_NguoiDung VARCHAR(20), @ID_Game int)
+AS
+BEGIN
+    SELECT ID_YeuThich FROM YeuThich
+    WHERE ID_NguoiDung = @ID_NguoiDung and ID_Game = @ID_Game
 END
 GO
 -----------------------------------Xem Menu------------------------------------------------------------------

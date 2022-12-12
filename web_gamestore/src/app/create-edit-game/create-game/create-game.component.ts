@@ -38,7 +38,7 @@ export class CreateGameComponent implements OnInit {
   addGameClick(){
       var val =  {Ten_Game:this.Ten_Game,Ten_NhaSanXuat:this.Ten_NhaSanXuat,SoHieuPhienBan:this.SoHieuPhienBan
       ,PhienBan:this.PhienBan,YC_CauHinh:this.YC_CauHinh,LuotTaiXuong:this.LuotTaiXuong,DanhGiaTB:this.DanhGiaTB,GioiHan_Tuoi:this.GioiHan_Tuoi,
-      Gia:this.Gia,MoTaChiTiet:this.MoTaChiTiet,UserName_Tao:this.UserName_Tao,NgayTao:this.NgayTao,UserName_CapNhat:this.service.username,
+      Gia:this.Gia,MoTaChiTiet:this.MoTaChiTiet,UserName_Tao:this.service.username,NgayTao:this.NgayTao,UserName_CapNhat:this.service.username,
       NgayCapNhat:this.NgayCapNhat,Logo_Game:this.Logo_Game};
       this.service.getIDNameGame(this.Ten_Game).subscribe(id=>{
         if(id != "error"){

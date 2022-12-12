@@ -78,11 +78,11 @@ D:\Data\GameStoreAPI\gamestoreAPI\gamestoreAPI\bin\System.Web.WebPages.Deploymen
 D:\Data\GameStoreAPI\gamestoreAPI\gamestoreAPI\bin\System.Web.WebPages.Razor.xml
 D:\Data\GameStoreAPI\gamestoreAPI\gamestoreAPI\bin\Antlr3.Runtime.pdb
 D:\Data\GameStoreAPI\gamestoreAPI\gamestoreAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Data\GameStoreAPI\gamestoreAPI\gamestoreAPI\obj\Debug\gamestoreAPI.csproj.AssemblyReference.cache
-D:\Data\GameStoreAPI\gamestoreAPI\gamestoreAPI\obj\Debug\gamestoreAPI.csproj.CoreCompileInputs.cache
-D:\Data\GameStoreAPI\gamestoreAPI\gamestoreAPI\obj\Debug\gamestoreAPI.csproj.CopyComplete
 D:\Data\GameStoreAPI\gamestoreAPI\gamestoreAPI\obj\Debug\gamestoreAPI.dll
 D:\Data\GameStoreAPI\gamestoreAPI\gamestoreAPI\obj\Debug\gamestoreAPI.pdb
 D:\Data\GameStoreAPI\gamestoreAPI\gamestoreAPI\bin\System.Web.Cors.dll
 D:\Data\GameStoreAPI\gamestoreAPI\gamestoreAPI\bin\System.Web.Http.Cors.dll
 D:\Data\GameStoreAPI\gamestoreAPI\gamestoreAPI\bin\System.Web.Http.Cors.xml
+D:\Data\GameStoreAPI\gamestoreAPI\gamestoreAPI\obj\Debug\gamestoreAPI.csproj.AssemblyReference.cache
+D:\Data\GameStoreAPI\gamestoreAPI\gamestoreAPI\obj\Debug\gamestoreAPI.csproj.CoreCompileInputs.cache
+D:\Data\GameStoreAPI\gamestoreAPI\gamestoreAPI\obj\Debug\gamestoreAPI.csproj.CopyComplete
