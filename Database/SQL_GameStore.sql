@@ -452,6 +452,21 @@ CREATE PROC deleteGame
 (@ID_Game INT)
 AS
 BEGIN
+	DELETE FROM GameDaTai
+	WHERE ID_Game = @ID_Game
+	
+	DELETE FROM YeuThich
+	WHERE ID_Game = @ID_Game
+
+	DELETE FROM ChiTietGame
+	WHERE ID_Game = @ID_Game
+
+	DELETE FROM HinhAnh
+	WHERE ID_Game = @ID_Game
+
+	DELETE FROM BinhLuan
+	WHERE ID_Game = @ID_Game
+
     DELETE FROM Game
     WHERE ID_Game = @ID_Game
 END
